@@ -1,41 +1,126 @@
-# Prerequisites
-*.d
+# Model Files (GGUF models are large - don't commit to git)
+*.gguf
+*.bin
+*.safetensors
+*.pth
+*.pt
+models/
+weights/
+checkpoints/
 
-# Compiled Object files
-*.slo
-*.lo
+# Build artifacts
+build/
+bin/
+obj/
+out/
 *.o
 *.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
+*.exe
+*.dll
 *.so
 *.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
 *.a
 *.lib
 
-# Executables
-*.exe
-*.out
-*.app
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
 
-# debug information files
-*.dwo
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.suo
+*.user
+*.sln.docstates
+x64/
+x86/
+Debug/
+Release/
+
+# Xcode
+*.xcodeproj
+*.xcworkspace
+DerivedData/
+
+# Datasets (large files - store externally)
+data/raw/
+data/processed/
+datasets/
+*.csv
+*.json
+floorplans/
+training_data/
+
+# Test outputs
+test_outputs/
+generated_designs/
+inference_results/
+
+# Logs and temporary files
+*.log
+logs/
+temp/
+tmp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# Python (if using hybrid setup or preprocessing scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+*.ipynb_checkpoints
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+.atom/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# llama.cpp specific
+llama.cpp/build/
+llama.cpp/models/
+ggml-metal.metal
+
+# Documentation build
+docs/_build/
+site/
+
+# Dependencies (if using submodules, keep .gitmodules)
+third_party/*/build/
+vendor/*/build/
+
+# API keys and credentials
+.env.local
+config/secrets.*
+*.key
+credentials.json
+
+# Large media files for testing
+test_images/*.png
+test_images/*.jpg
+!test_images/sample.png  # Keep one small sample
+
+# Profiling and performance data
+*.prof
+perf.data*
+callgrind.out.*
+
+# Package manager
+conan/
+vcpkg/installed/
