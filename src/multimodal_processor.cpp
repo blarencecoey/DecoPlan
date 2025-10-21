@@ -1,9 +1,13 @@
 #include "multimodal_processor.h"
 #include "llama.h"
-#include "llava.h"
 
 #include <iostream>
 #include <stdexcept>
+#include <fstream>
+
+// Note: Full multimodal support requires llama.cpp's MTMD (multimodal) tools
+// For now, this is a simplified text-only implementation
+// TODO: Integrate with llama.cpp/tools/mtmd for vision support
 
 namespace decoplan {
 
@@ -63,11 +67,13 @@ bool MultimodalProcessor::initialize(const MultimodalConfig& config) {
 }
 
 void MultimodalProcessor::cleanup() {
+    // TODO: Free image_embed_ when MTMD integration is complete
     if (image_embed_) {
-        llava_image_embed_free(image_embed_);
+        // llava_image_embed_free(image_embed_);
         image_embed_ = nullptr;
     }
 
+    // TODO: Free clip_ctx_ when MTMD integration is complete
     if (clip_ctx_) {
         // clip_free(clip_ctx_);
         clip_ctx_ = nullptr;
@@ -80,30 +86,25 @@ void MultimodalProcessor::cleanup() {
 }
 
 bool MultimodalProcessor::loadImage(const std::string& image_path) {
-    if (!clip_ctx_) {
-        std::cerr << "Vision encoder not initialized" << std::endl;
+    // TODO: Implement image loading with llama.cpp MTMD tools
+    // For now, just verify the image file exists
+
+    std::ifstream file(image_path, std::ios::binary);
+    if (!file.good()) {
+        std::cerr << "Image file not found: " << image_path << std::endl;
         return false;
     }
 
-    // Free previous image embed if exists
-    if (image_embed_) {
-        llava_image_embed_free(image_embed_);
-        image_embed_ = nullptr;
-    }
+    // TODO: When MTMD is integrated:
+    // 1. Load image using clip_image_u8_init() and load from file
+    // 2. Preprocess with clip_image_preprocess()
+    // 3. Encode with clip_image_batch_encode()
+    // 4. Store embeddings for use in generation
 
-    // Load and encode image
-    // This is model-specific - example for LLaVA
-    // auto img = clip_image_load_from_file(image_path.c_str());
-    // if (!img) {
-    //     std::cerr << "Failed to load image: " << image_path << std::endl;
-    //     return false;
-    // }
+    std::cout << "Note: Image loading placeholder - full vision support coming soon" << std::endl;
+    std::cout << "Image file verified: " << image_path << std::endl;
 
-    // image_embed_ = llava_image_embed_make_with_clip_img(clip_ctx_, img);
-    // clip_image_free(img);
-
-    // For now, just return true if we have a clip context
-    return clip_ctx_ != nullptr;
+    return true;
 }
 
 std::string MultimodalProcessor::generateFromImage(

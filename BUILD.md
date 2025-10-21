@@ -88,22 +88,60 @@ For native Windows builds, use Visual Studio 2019+ or MinGW.
 
 ### CMake can't find CUDA
 ```bash
+# Set CUDA path
 export CUDA_PATH=/usr/local/cuda
-cmake .. -DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc
+export PATH=/usr/local/cuda/bin:$PATH
+
+# Configure with explicit CUDA compiler
+cmake .. -DDECOPLAN_USE_CUDA=ON -DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc
 ```
 
-### Linking errors
-Make sure llama.cpp built successfully:
+### Linking errors with llama or common
+Check that the include paths are correct:
+```bash
+# The CMakeLists.txt should point to:
+external/llama.cpp/include      # for llama.h
+external/llama.cpp/common       # for common headers
+external/llama.cpp/ggml/include # for ggml headers
+```
+
+If you get undefined references, rebuild llama.cpp:
 ```bash
 cd external/llama.cpp
-cmake -B build
+cmake -B build -DGGML_CUDA=ON
 cmake --build build -j$(nproc)
+cd ../..
+```
+
+### "Cannot find llama.h" or similar include errors
+The include paths were updated. Make sure you're using:
+```cpp
+#include "llama.h"      // Not <llama.h>
+#include "common.h"     // Not <common.h>
 ```
 
 ### Out of memory during compilation
 Reduce parallel jobs:
 ```bash
 cmake --build . -j2
+# Or even single-threaded
+cmake --build .
+```
+
+### CUDA version mismatch
+Make sure your CUDA version matches what's supported by llama.cpp:
+```bash
+nvcc --version  # Check CUDA version
+nvidia-smi      # Check driver version
+```
+
+Minimum CUDA version: 11.0
+
+### Build for CPU only (no CUDA)
+```bash
+./build.sh --no-cuda
+# Or manually:
+cmake .. -DDECOPLAN_USE_CUDA=OFF -DGGML_CUDA=OFF
 ```
 
 ## Next Steps

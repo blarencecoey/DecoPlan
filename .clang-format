@@ -1,0 +1,41 @@
+---
+# DecoPlan LLM C++ Code Style
+BasedOnStyle: Google
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 100
+
+# Braces
+BreakBeforeBraces: Attach
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+# Pointers and References
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+# Includes
+SortIncludes: CaseInsensitive
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex:           '^"(llm_wrapper|multimodal_processor)'
+    Priority:        1
+  - Regex:           '^"'
+    Priority:        2
+  - Regex:           '^<llama'
+    Priority:        3
+  - Regex:           '^<'
+    Priority:        4
+
+# Namespaces
+NamespaceIndentation: None
+CompactNamespaces: false
+
+# Other
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: None
+AlignConsecutiveDeclarations: None
+AlignOperands: Align
+AlignTrailingComments: true

@@ -58,10 +58,20 @@ echo "  CUDA Support: $USE_CUDA"
 echo "  Build Type: $BUILD_TYPE"
 echo ""
 
-cmake .. \
-    -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
-    -DDECOPLAN_USE_CUDA=$USE_CUDA \
-    -DDECOPLAN_BUILD_EXAMPLES=ON
+# Enable CUDA language only if CUDA is requested
+if [ "$USE_CUDA" = "ON" ]; then
+    cmake .. \
+        -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+        -DDECOPLAN_USE_CUDA=ON \
+        -DDECOPLAN_BUILD_EXAMPLES=ON \
+        -DGGML_CUDA=ON
+else
+    cmake .. \
+        -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+        -DDECOPLAN_USE_CUDA=OFF \
+        -DDECOPLAN_BUILD_EXAMPLES=ON \
+        -DGGML_CUDA=OFF
+fi
 
 # Build
 echo ""

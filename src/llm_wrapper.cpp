@@ -3,6 +3,7 @@
 #include "common.h"
 #include "sampling.h"
 
+#include <thread>
 #include <iostream>
 #include <stdexcept>
 #include <cstring>
@@ -97,8 +98,10 @@ std::vector<int> LLMWrapper::tokenize(const std::string& text, bool add_bos) {
     int n_tokens = text.length() + (add_bos ? 1 : 0) + 1;
     std::vector<int> tokens(n_tokens);
 
+    auto vocab = llama_model_get_vocab(model_);
+
     n_tokens = llama_tokenize(
-        model_,
+        vocab,
         text.c_str(),
         text.length(),
         tokens.data(),
@@ -110,7 +113,7 @@ std::vector<int> LLMWrapper::tokenize(const std::string& text, bool add_bos) {
     if (n_tokens < 0) {
         tokens.resize(-n_tokens);
         n_tokens = llama_tokenize(
-            model_,
+            vocab,
             text.c_str(),
             text.length(),
             tokens.data(),
@@ -128,9 +131,11 @@ std::string LLMWrapper::detokenize(const std::vector<int>& tokens) {
     std::string result;
     result.reserve(tokens.size() * 4);  // Rough estimate
 
+    auto vocab = llama_model_get_vocab(model_);
+
     for (int token : tokens) {
         char buf[256];
-        int n = llama_token_to_piece(model_, token, buf, sizeof(buf), 0, false);
+        int n = llama_token_to_piece(vocab, token, buf, sizeof(buf), 0, false);
         if (n > 0) {
             result.append(buf, n);
         }
@@ -166,12 +171,14 @@ std::string LLMWrapper::generate(const std::string& prompt) {
     int n_cur = tokens.size();
     int n_decode = 0;
 
+    auto vocab = llama_model_get_vocab(model_);
+
     while (n_decode < config_.n_predict) {
         // Sample next token
         int new_token_id = llama_sampler_sample(sampler_, ctx_, -1);
 
         // Check for EOS
-        if (llama_token_is_eog(model_, new_token_id)) {
+        if (llama_vocab_is_eog(vocab, new_token_id)) {
             break;
         }
 
@@ -214,12 +221,14 @@ void LLMWrapper::generateStreaming(const std::string& prompt, StreamCallback cal
     // Generate tokens with streaming
     int n_decode = 0;
 
+    auto vocab = llama_model_get_vocab(model_);
+
     while (n_decode < config_.n_predict) {
         // Sample next token
         int new_token_id = llama_sampler_sample(sampler_, ctx_, -1);
 
         // Check for EOS
-        if (llama_token_is_eog(model_, new_token_id)) {
+        if (llama_vocab_is_eog(vocab, new_token_id)) {
             break;
         }
 
