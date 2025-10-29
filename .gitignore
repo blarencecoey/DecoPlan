@@ -4,7 +4,8 @@
 *.safetensors
 *.pth
 *.pt
-models/
+models/lora_checkpoints/
+models/*.gguf
 weights/
 checkpoints/
 
@@ -51,9 +52,10 @@ DerivedData/
 # Datasets (large files - store externally)
 data/raw/
 data/processed/
-datasets/
-*.csv
-*.json
+# Keep source datasets but exclude generated ones
+datasets/Output/lora_splits/
+datasets/Output/lora_training_data.json
+datasets/Output/rag_enhanced_prompts.json
 floorplans/
 training_data/
 
@@ -80,6 +82,12 @@ venv/
 env/
 .env
 *.ipynb_checkpoints
+
+# RAG vector database (generated)
+furniture_db/
+
+# Evaluation results
+evaluation/
 
 # IDE files
 .vscode/
