@@ -21,6 +21,7 @@ Pillow>=10.0.0
 datasets>=2.14.0
 tqdm>=4.66.0
 wandb>=0.16.0
+dill>=0.3.0  # Required by datasets
 
 # GGUF conversion
 gguf>=0.1.0
