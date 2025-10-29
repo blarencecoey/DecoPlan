@@ -1,6 +1,15 @@
+#!/usr/bin/env python3
 """
 Build vector database from furniture catalog for RAG retrieval.
 """
+
+# Fix SQLite version for ChromaDB (must be before any chromadb imports)
+try:
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    pass  # pysqlite3 not installed, will use system sqlite3
 
 import pandas as pd
 import chromadb

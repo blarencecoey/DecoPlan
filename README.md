@@ -1,50 +1,85 @@
 # DecoPlan LLM
 
-AI-powered interior design assistant for Singapore BTOs and HDB layouts using multimodal vision-language models.
+AI-powered interior design assistant for Singapore BTOs and HDB layouts using multimodal vision-language models with **RAG (Retrieval-Augmented Generation)** and **LoRA (Low-Rank Adaptation)**.
 
 ## Overview
 
-DecoPlan LLM is a C++ framework built on [llama.cpp](https://github.com/ggerganov/llama.cpp) that enables vision-language models to analyze floor plans and provide intelligent furniture placement, design recommendations, and space optimization suggestions tailored for Singapore HDB flats.
+DecoPlan LLM combines:
+- **C++ Inference Framework**: Built on [llama.cpp](https://github.com/ggerganov/llama.cpp) for efficient vision-language model inference
+- **RAG System**: Semantic search over 10,000 furniture items for contextual recommendations
+- **LoRA Fine-tuning**: Efficient model adaptation for Singapore HDB-specific interior design
+
+The system analyzes floor plans and provides intelligent furniture placement, design recommendations, and space optimization suggestions tailored for Singapore HDB flats.
 
 ## Features
 
+### C++ Inference
 - **Multimodal Vision-Language Models**: Analyze floor plans using LLaVA, Qwen2-VL, or Llama 3.2 Vision
 - **CUDA GPU Acceleration**: Efficient inference with CUDA support
 - **GGUF Model Support**: Use quantized models (Q4_K_M, Q5_K_M, etc.) for optimal VRAM usage
 - **Streaming Inference**: Real-time token-by-token generation
 - **Easy C++ API**: Clean wrapper around llama.cpp for production use
 
+### RAG System (Python)
+- **Semantic Furniture Search**: 10,000 furniture items indexed with embeddings
+- **Fast Retrieval**: <1 second query time on CPU
+- **Contextual Recommendations**: Retrieves relevant furniture based on user requests
+- **Filtering**: By type, material, color, and style
+
+### LoRA Fine-tuning (Python)
+- **Efficient Training**: 1-2% trainable parameters vs full fine-tuning
+- **4-bit Quantization**: Train on consumer GPUs (12GB+ VRAM)
+- **Quick Adaptation**: Learn HDB-specific design patterns in 2-4 hours
+- **Modular Adapters**: Swap adapters for different styles/rooms
+
 ## Quick Start
 
-### 1. Build
+### RAG + LoRA System (Python)
 
 ```bash
+# 1. Install dependencies
+pip install -r requirements.txt  # or see INSTALL_GUIDE.md
+
+# 2. Run automated setup
+bash setup_rag_lora.sh
+
+# 3. Test RAG retrieval
+python3 rag/furniture_retriever.py --query "minimalist living room"
+```
+
+See [QUICKSTART_RAG_LORA.md](QUICKSTART_RAG_LORA.md) for full guide.
+
+### C++ Inference
+
+```bash
+# 1. Build
 mkdir build && cd build
 cmake .. -DDECOPLAN_USE_CUDA=ON
 cmake --build . -j$(nproc)
-```
 
-See [BUILD.md](BUILD.md) for detailed build instructions.
-
-### 2. Download a Model
-
-```bash
+# 2. Download a Model
 pip install huggingface-hub
 python scripts/download_model.py llava-1.6-mistral-7b
-```
 
-### 3. Run Inference
-
-```bash
-# Analyze a floor plan image
+# 3. Run Inference
 ./build/multimodal_inference \
     models/llava-v1.6-mistral-7b.Q4_K_M.gguf \
     floor_plan.jpg \
     "Suggest furniture placement for this living room"
 ```
 
+See [BUILD.md](BUILD.md) for detailed C++ build instructions.
+
 ## Documentation
 
+### RAG + LoRA System
+- [OVERVIEW.md](OVERVIEW.md) - Complete system overview
+- [QUICKSTART_RAG_LORA.md](QUICKSTART_RAG_LORA.md) - Quick start guide (5 minutes)
+- [RAG_LORA_README.md](RAG_LORA_README.md) - Full RAG + LoRA documentation
+- [INSTALL_GUIDE.md](INSTALL_GUIDE.md) - Installation troubleshooting
+- [IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md) - Technical details
+
+### C++ Inference
 - [BUILD.md](BUILD.md) - Build instructions and requirements
 - [USAGE.md](USAGE.md) - Detailed usage guide, API documentation, and examples
 - [examples/](examples/) - Example programs

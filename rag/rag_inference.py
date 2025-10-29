@@ -1,7 +1,16 @@
+#!/usr/bin/env python3
 """
 RAG-enhanced inference for DecoPlan LLM.
 Combines furniture retrieval with LLM generation.
 """
+
+# Fix SQLite version for ChromaDB (must be before any chromadb imports)
+try:
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    pass  # pysqlite3 not installed, will use system sqlite3
 
 import argparse
 import json
