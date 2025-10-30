@@ -30,7 +30,7 @@ DecoPlan LLM/
 ├── 📊 Datasets (datasets/)
 │   ├── Input/
 │   │   ├── hdb_interior_design_prompts_300.csv     - 300 design prompts
-│   │   ├── Furniture Data Report.csv               - 10,000 furniture items
+│   │   ├── Furniture Dataset - Furniture Data.csv  - 10,000 furniture items
 │   │   └── floorplan.jpg                           - Sample floor plan
 │   └── Output/
 │       └── training_examples_with_outputs.json     - Training examples

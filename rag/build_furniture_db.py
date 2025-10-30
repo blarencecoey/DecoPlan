@@ -54,10 +54,12 @@ class FurnitureVectorDB:
         Returns:
             Formatted description string
         """
-        return (
+        description = (
             f"{row['Name']}: A {row['Feel']} style {row['Furniture Type']} "
-            f"made of {row['Material']} in {row['Color']} color."
+            f"made of {row['Material']} in {row['Color']} color. "
+            f"Dimensions: {row['Dimensions (cm)']}."
         )
+        return description
 
     def build_database(self, furniture_csv_path: str, collection_name: str = "furniture_catalog"):
         """
@@ -100,7 +102,9 @@ class FurnitureVectorDB:
                 "furniture_type": row['Furniture Type'],
                 "material": row['Material'],
                 "color": row['Color'],
-                "feel": row['Feel']
+                "feel": row['Feel'],
+                "is_accessory": str(row['Is_Accessory']),
+                "dimensions": row['Dimensions (cm)']
             })
 
             ids.append(f"furniture_{idx}")
@@ -151,7 +155,7 @@ def main():
     parser.add_argument(
         "--furniture_csv",
         type=str,
-        default="datasets/Input/Furniture Data Report (1).xlsx - Furniture Data.csv",
+        default="datasets/Input/Furniture Dataset - Furniture Data.csv",
         help="Path to furniture CSV file"
     )
     parser.add_argument(

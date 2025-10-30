@@ -38,7 +38,7 @@ read -p "Build furniture vector database? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     python rag/build_furniture_db.py \
-        --furniture_csv "datasets/Input/Furniture Data Report (1).xlsx - Furniture Data.csv" \
+        --furniture_csv "datasets/Input/Furniture Dataset - Furniture Data.csv" \
         --db_path ./furniture_db \
         --model "all-MiniLM-L6-v2"
     echo "✓ Vector database built"

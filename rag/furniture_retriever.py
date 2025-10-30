@@ -101,6 +101,8 @@ class FurnitureRetriever:
                 'material': results['metadatas'][0][i]['material'],
                 'color': results['metadatas'][0][i]['color'],
                 'feel': results['metadatas'][0][i]['feel'],
+                'is_accessory': results['metadatas'][0][i].get('is_accessory', 'N/A'),
+                'dimensions': results['metadatas'][0][i].get('dimensions', 'N/A'),
                 'description': results['documents'][0][i],
                 'relevance_score': 1 - results['distances'][0][i]  # Convert distance to similarity
             })
@@ -187,6 +189,8 @@ class FurnitureRetriever:
             context += f"   Material: {item['material']}\n"
             context += f"   Color: {item['color']}\n"
             context += f"   Style: {item['feel']}\n"
+            context += f"   Dimensions: {item['dimensions']}\n"
+            context += f"   Is Accessory: {item['is_accessory']}\n"
             context += f"   Relevance: {item['relevance_score']:.3f}\n\n"
 
         return context
@@ -235,6 +239,7 @@ def main():
         print(f"\n{i}. {item['name']}")
         print(f"   Type: {item['furniture_type']}")
         print(f"   Material: {item['material']}, Color: {item['color']}, Style: {item['feel']}")
+        print(f"   Dimensions: {item['dimensions']}, Is Accessory: {item['is_accessory']}")
         print(f"   Relevance: {item['relevance_score']:.4f}")
 
     print("\n" + "=" * 80)

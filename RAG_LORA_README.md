@@ -32,7 +32,7 @@ pip install -r requirements.txt
 ```bash
 # Build furniture vector database from catalog
 python rag/build_furniture_db.py \
-    --furniture_csv "datasets/Input/Furniture Data Report (1).xlsx - Furniture Data.csv" \
+    --furniture_csv "datasets/Input/Furniture Dataset - Furniture Data.csv" \
     --db_path ./furniture_db
 ```
 
@@ -348,7 +348,7 @@ DecoPlan LLM/
 ├── datasets/
 │   ├── Input/
 │   │   ├── hdb_interior_design_prompts_300.csv
-│   │   └── Furniture Data Report.csv
+│   │   └── Furniture Dataset - Furniture Data.csv
 │   └── Output/
 │       ├── training_examples_with_outputs.json
 │       ├── lora_training_data.json

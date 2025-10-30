@@ -58,7 +58,7 @@ def check_datasets():
 
     files = {
         "datasets/Input/hdb_interior_design_prompts_300.csv": "Prompts CSV",
-        "datasets/Input/Furniture Data Report (1).xlsx - Furniture Data.csv": "Furniture CSV",
+        "datasets/Input/Furniture Dataset - Furniture Data.csv": "Furniture CSV",
         "datasets/Output/training_examples_with_outputs.json": "Training Examples",
     }
 
@@ -185,7 +185,7 @@ def print_next_steps():
     print("")
     print("1. Build RAG vector database:")
     print('   python rag/build_furniture_db.py \\')
-    print('       --furniture_csv "datasets/Input/Furniture Data Report (1).xlsx - Furniture Data.csv"')
+    print('       --furniture_csv "datasets/Input/Furniture Dataset - Furniture Data.csv"')
     print("")
     print("2. Test RAG retrieval:")
     print('   python rag/furniture_retriever.py \\')
