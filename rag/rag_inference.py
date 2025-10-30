@@ -16,7 +16,7 @@ import argparse
 import json
 from pathlib import Path
 from typing import Dict, List, Optional
-from furniture_retriever import FurnitureRetriever
+from .furniture_retriever import FurnitureRetriever
 
 
 class RAGInference:

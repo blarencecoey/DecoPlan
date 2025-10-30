@@ -1,0 +1,24 @@
+# Minimal requirements for Flask Backend only
+# Use this instead of requirements.txt if you only need to run the API
+
+# Web Backend
+flask>=3.0.0
+flask-cors>=4.0.0
+
+# Vector database and embeddings (core RAG components)
+chromadb>=0.4.0
+sentence-transformers>=2.2.0
+pysqlite3-binary>=0.5.0  # For ChromaDB on systems with old SQLite
+
+# Python 3.8 compatibility fix
+posthog<3.2.0  # Newer versions use Python 3.9+ type hints
+
+# Note: sentence-transformers will automatically install:
+# - torch (PyTorch)
+# - transformers
+# - numpy
+# - scipy
+# These are required dependencies and will be installed automatically.
+
+# Optional: For batch processing with CSV files (not needed for API)
+# pandas>=2.0.0
