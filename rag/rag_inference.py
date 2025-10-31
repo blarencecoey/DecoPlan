@@ -143,6 +143,8 @@ class RAGInference:
                     "material": item['material'],
                     "color": item['color'],
                     "feel": item['feel'],
+                    "is_accessory": item['is_accessory'],
+                    "dimensions": item['dimensions'],
                     "relevance_score": round(item['relevance_score'], 4)
                 }
                 for item in furniture_items

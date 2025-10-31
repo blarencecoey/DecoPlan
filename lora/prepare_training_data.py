@@ -33,6 +33,10 @@ class TrainingDataPreparator:
             output.append(f"   - Type: {item['furniture_type']}")
             output.append(f"   - Material: {item['material']}, Color: {item['color']}, Style: {item['feel']}")
 
+            # Add is_accessory if available
+            if 'is_accessory' in item:
+                output.append(f"   - Is Accessory: {item['is_accessory']}")
+
             # Add dimensions if available
             if 'dimensions' in item:
                 dims = item['dimensions']

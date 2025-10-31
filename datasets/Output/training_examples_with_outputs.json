@@ -5,7 +5,11 @@
     "room_type": "living_room",
     "style": "minimalist",
     "floor_plan_metadata": {
-      "room_dimensions": {"length": 5.0, "width": 4.0, "unit": "meters"},
+      "room_dimensions": {
+        "length": 5.0,
+        "width": 4.0,
+        "unit": "meters"
+      },
       "available_space": 20.0,
       "note": "This would be replaced with actual floor plan data/image"
     },
@@ -17,8 +21,18 @@
           "material": "Wicker",
           "color": "Oak Finish",
           "feel": "Minimalist",
-          "dimensions": {"length": 220, "width": 90, "height": 80, "unit": "cm"},
-          "position": {"x": 100, "y": 150, "rotation": 0}
+          "dimensions": {
+            "length": 220,
+            "width": 90,
+            "height": 80,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 100,
+            "y": 150,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Plywood Armchair Model 3664",
@@ -26,8 +40,18 @@
           "material": "Plywood",
           "color": "Oak Finish",
           "feel": "Minimalist",
-          "dimensions": {"length": 80, "width": 75, "height": 85, "unit": "cm"},
-          "position": {"x": 350, "y": 150, "rotation": 270}
+          "dimensions": {
+            "length": 80,
+            "width": 75,
+            "height": 85,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 350,
+            "y": 150,
+            "rotation": 270
+          },
+          "is_accessory": false
         },
         {
           "name": "Wood Coffee Table Model 7295",
@@ -35,8 +59,18 @@
           "material": "Wood",
           "color": "Yellow",
           "feel": "Minimalist",
-          "dimensions": {"length": 120, "width": 60, "height": 45, "unit": "cm"},
-          "position": {"x": 200, "y": 250, "rotation": 0}
+          "dimensions": {
+            "length": 120,
+            "width": 60,
+            "height": 45,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 200,
+            "y": 250,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Bamboo Cabinet Model 3426",
@@ -44,8 +78,18 @@
           "material": "Bamboo",
           "color": "Natural",
           "feel": "Minimalist",
-          "dimensions": {"length": 100, "width": 40, "height": 180, "unit": "cm"},
-          "position": {"x": 50, "y": 50, "rotation": 0}
+          "dimensions": {
+            "length": 100,
+            "width": 40,
+            "height": 180,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 50,
+            "y": 50,
+            "rotation": 0
+          },
+          "is_accessory": false
         }
       ],
       "total_furniture_count": 4,
@@ -58,7 +102,11 @@
     "room_type": "living_room",
     "style": "budget",
     "floor_plan_metadata": {
-      "room_dimensions": {"length": 4.5, "width": 4.0, "unit": "meters"},
+      "room_dimensions": {
+        "length": 4.5,
+        "width": 4.0,
+        "unit": "meters"
+      },
       "available_space": 18.0
     },
     "expected_output": {
@@ -69,8 +117,18 @@
           "material": "Plywood",
           "color": "Walnut Finish",
           "feel": "Contemporary",
-          "dimensions": {"length": 200, "width": 85, "height": 78, "unit": "cm"},
-          "position": {"x": 100, "y": 150, "rotation": 0}
+          "dimensions": {
+            "length": 200,
+            "width": 85,
+            "height": 78,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 100,
+            "y": 150,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Plastic Coffee Table Model 5673",
@@ -78,8 +136,18 @@
           "material": "Plastic",
           "color": "Walnut Finish",
           "feel": "Mid-Century",
-          "dimensions": {"length": 100, "width": 55, "height": 42, "unit": "cm"},
-          "position": {"x": 180, "y": 250, "rotation": 0}
+          "dimensions": {
+            "length": 100,
+            "width": 55,
+            "height": 42,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 180,
+            "y": 250,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Plywood Cabinet Model 2040",
@@ -87,8 +155,18 @@
           "material": "Plywood",
           "color": "White",
           "feel": "Bohemian",
-          "dimensions": {"length": 90, "width": 35, "height": 160, "unit": "cm"},
-          "position": {"x": 50, "y": 50, "rotation": 0}
+          "dimensions": {
+            "length": 90,
+            "width": 35,
+            "height": 160,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 50,
+            "y": 50,
+            "rotation": 0
+          },
+          "is_accessory": false
         }
       ],
       "total_furniture_count": 3,
@@ -101,7 +179,11 @@
     "room_type": "living_room",
     "style": "scandinavian",
     "floor_plan_metadata": {
-      "room_dimensions": {"length": 5.5, "width": 4.2, "unit": "meters"},
+      "room_dimensions": {
+        "length": 5.5,
+        "width": 4.2,
+        "unit": "meters"
+      },
       "available_space": 23.1
     },
     "expected_output": {
@@ -112,8 +194,18 @@
           "material": "Walnut",
           "color": "Brown",
           "feel": "Scandinavian",
-          "dimensions": {"length": 230, "width": 90, "height": 82, "unit": "cm"},
-          "position": {"x": 120, "y": 180, "rotation": 0}
+          "dimensions": {
+            "length": 230,
+            "width": 90,
+            "height": 82,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 120,
+            "y": 180,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Aluminum Armchair Model 5040",
@@ -121,8 +213,18 @@
           "material": "Aluminum",
           "color": "Brown",
           "feel": "Scandinavian",
-          "dimensions": {"length": 75, "width": 72, "height": 83, "unit": "cm"},
-          "position": {"x": 380, "y": 180, "rotation": 270}
+          "dimensions": {
+            "length": 75,
+            "width": 72,
+            "height": 83,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 380,
+            "y": 180,
+            "rotation": 270
+          },
+          "is_accessory": false
         },
         {
           "name": "Bamboo Bookshelf Model 9317",
@@ -130,8 +232,18 @@
           "material": "Bamboo",
           "color": "Espresso",
           "feel": "Scandinavian",
-          "dimensions": {"length": 80, "width": 30, "height": 200, "unit": "cm"},
-          "position": {"x": 50, "y": 50, "rotation": 0}
+          "dimensions": {
+            "length": 80,
+            "width": 30,
+            "height": 200,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 50,
+            "y": 50,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Slim Teak Coffee Table Model 4644",
@@ -139,8 +251,18 @@
           "material": "Teak",
           "color": "Natural",
           "feel": "Mid-Century",
-          "dimensions": {"length": 110, "width": 60, "height": 40, "unit": "cm"},
-          "position": {"x": 200, "y": 280, "rotation": 0}
+          "dimensions": {
+            "length": 110,
+            "width": 60,
+            "height": 40,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 200,
+            "y": 280,
+            "rotation": 0
+          },
+          "is_accessory": false
         }
       ],
       "total_furniture_count": 4,
@@ -153,7 +275,11 @@
     "room_type": "bedroom",
     "style": "master",
     "floor_plan_metadata": {
-      "room_dimensions": {"length": 4.0, "width": 3.5, "unit": "meters"},
+      "room_dimensions": {
+        "length": 4.0,
+        "width": 3.5,
+        "unit": "meters"
+      },
       "available_space": 14.0
     },
     "expected_output": {
@@ -164,8 +290,18 @@
           "material": "Fabric",
           "color": "Espresso",
           "feel": "Contemporary",
-          "dimensions": {"length": 210, "width": 180, "height": 120, "unit": "cm"},
-          "position": {"x": 150, "y": 100, "rotation": 0}
+          "dimensions": {
+            "length": 210,
+            "width": 180,
+            "height": 120,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 150,
+            "y": 100,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Marble Nightstand Model 1750",
@@ -173,8 +309,18 @@
           "material": "Marble",
           "color": "Gray",
           "feel": "Modern",
-          "dimensions": {"length": 50, "width": 40, "height": 55, "unit": "cm"},
-          "position": {"x": 50, "y": 100, "rotation": 0}
+          "dimensions": {
+            "length": 50,
+            "width": 40,
+            "height": 55,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 50,
+            "y": 100,
+            "rotation": 0
+          },
+          "is_accessory": true
         },
         {
           "name": "Marble Nightstand Model 1750",
@@ -182,8 +328,18 @@
           "material": "Marble",
           "color": "Gray",
           "feel": "Modern",
-          "dimensions": {"length": 50, "width": 40, "height": 55, "unit": "cm"},
-          "position": {"x": 360, "y": 100, "rotation": 0}
+          "dimensions": {
+            "length": 50,
+            "width": 40,
+            "height": 55,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 360,
+            "y": 100,
+            "rotation": 0
+          },
+          "is_accessory": true
         },
         {
           "name": "Aluminum Dresser Model 5422",
@@ -191,8 +347,18 @@
           "material": "Aluminum",
           "color": "Red",
           "feel": "Bohemian",
-          "dimensions": {"length": 120, "width": 50, "height": 90, "unit": "cm"},
-          "position": {"x": 200, "y": 320, "rotation": 180}
+          "dimensions": {
+            "length": 120,
+            "width": 50,
+            "height": 90,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 200,
+            "y": 320,
+            "rotation": 180
+          },
+          "is_accessory": false
         }
       ],
       "total_furniture_count": 4,
@@ -205,7 +371,11 @@
     "room_type": "bedroom",
     "style": "small",
     "floor_plan_metadata": {
-      "room_dimensions": {"length": 3.0, "width": 2.8, "unit": "meters"},
+      "room_dimensions": {
+        "length": 3.0,
+        "width": 2.8,
+        "unit": "meters"
+      },
       "available_space": 8.4
     },
     "expected_output": {
@@ -216,8 +386,18 @@
           "material": "Marble",
           "color": "Green",
           "feel": "Japanese",
-          "dimensions": {"length": 190, "width": 140, "height": 90, "unit": "cm"},
-          "position": {"x": 150, "y": 90, "rotation": 0}
+          "dimensions": {
+            "length": 190,
+            "width": 140,
+            "height": 90,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 150,
+            "y": 90,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Compact Plastic Nightstand Model 4652",
@@ -225,8 +405,18 @@
           "material": "Plastic",
           "color": "Oak Finish",
           "feel": "Industrial",
-          "dimensions": {"length": 40, "width": 35, "height": 50, "unit": "cm"},
-          "position": {"x": 50, "y": 90, "rotation": 0}
+          "dimensions": {
+            "length": 40,
+            "width": 35,
+            "height": 50,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 50,
+            "y": 90,
+            "rotation": 0
+          },
+          "is_accessory": true
         },
         {
           "name": "Steel Wardrobe Model 2654",
@@ -234,8 +424,18 @@
           "material": "Steel",
           "color": "Oak Finish",
           "feel": "Industrial",
-          "dimensions": {"length": 100, "width": 50, "height": 200, "unit": "cm"},
-          "position": {"x": 200, "y": 250, "rotation": 180}
+          "dimensions": {
+            "length": 100,
+            "width": 50,
+            "height": 200,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 200,
+            "y": 250,
+            "rotation": 180
+          },
+          "is_accessory": false
         }
       ],
       "total_furniture_count": 3,
@@ -248,7 +448,11 @@
     "room_type": "dining",
     "style": "small",
     "floor_plan_metadata": {
-      "room_dimensions": {"length": 3.5, "width": 2.5, "unit": "meters"},
+      "room_dimensions": {
+        "length": 3.5,
+        "width": 2.5,
+        "unit": "meters"
+      },
       "available_space": 8.75
     },
     "expected_output": {
@@ -259,8 +463,18 @@
           "material": "Bamboo",
           "color": "Natural",
           "feel": "Modern",
-          "dimensions": {"length": 120, "width": 80, "height": 75, "unit": "cm"},
-          "position": {"x": 175, "y": 125, "rotation": 0}
+          "dimensions": {
+            "length": 120,
+            "width": 80,
+            "height": 75,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 175,
+            "y": 125,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Plywood Chair Model 1993",
@@ -268,8 +482,18 @@
           "material": "Plywood",
           "color": "Cream",
           "feel": "Modern",
-          "dimensions": {"length": 50, "width": 50, "height": 85, "unit": "cm"},
-          "position": {"x": 100, "y": 80, "rotation": 90}
+          "dimensions": {
+            "length": 50,
+            "width": 50,
+            "height": 85,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 100,
+            "y": 80,
+            "rotation": 90
+          },
+          "is_accessory": false
         },
         {
           "name": "Plywood Chair Model 1993",
@@ -277,8 +501,18 @@
           "material": "Plywood",
           "color": "Cream",
           "feel": "Modern",
-          "dimensions": {"length": 50, "width": 50, "height": 85, "unit": "cm"},
-          "position": {"x": 250, "y": 80, "rotation": 90}
+          "dimensions": {
+            "length": 50,
+            "width": 50,
+            "height": 85,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 250,
+            "y": 80,
+            "rotation": 90
+          },
+          "is_accessory": false
         },
         {
           "name": "Plywood Chair Model 1993",
@@ -286,8 +520,18 @@
           "material": "Plywood",
           "color": "Cream",
           "feel": "Modern",
-          "dimensions": {"length": 50, "width": 50, "height": 85, "unit": "cm"},
-          "position": {"x": 100, "y": 170, "rotation": 270}
+          "dimensions": {
+            "length": 50,
+            "width": 50,
+            "height": 85,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 100,
+            "y": 170,
+            "rotation": 270
+          },
+          "is_accessory": false
         },
         {
           "name": "Plywood Chair Model 1993",
@@ -295,8 +539,18 @@
           "material": "Plywood",
           "color": "Cream",
           "feel": "Modern",
-          "dimensions": {"length": 50, "width": 50, "height": 85, "unit": "cm"},
-          "position": {"x": 250, "y": 170, "rotation": 270}
+          "dimensions": {
+            "length": 50,
+            "width": 50,
+            "height": 85,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 250,
+            "y": 170,
+            "rotation": 270
+          },
+          "is_accessory": false
         }
       ],
       "total_furniture_count": 5,
@@ -309,7 +563,11 @@
     "room_type": "study",
     "style": "home_office",
     "floor_plan_metadata": {
-      "room_dimensions": {"length": 3.0, "width": 2.5, "unit": "meters"},
+      "room_dimensions": {
+        "length": 3.0,
+        "width": 2.5,
+        "unit": "meters"
+      },
       "available_space": 7.5
     },
     "expected_output": {
@@ -320,8 +578,18 @@
           "material": "Wood",
           "color": "Beige",
           "feel": "Modern",
-          "dimensions": {"length": 140, "width": 70, "height": 75, "unit": "cm"},
-          "position": {"x": 150, "y": 100, "rotation": 0}
+          "dimensions": {
+            "length": 140,
+            "width": 70,
+            "height": 75,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 150,
+            "y": 100,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Plywood Armchair Model 6198",
@@ -329,8 +597,18 @@
           "material": "Plywood",
           "color": "Beige",
           "feel": "Contemporary",
-          "dimensions": {"length": 65, "width": 65, "height": 90, "unit": "cm"},
-          "position": {"x": 150, "y": 170, "rotation": 180}
+          "dimensions": {
+            "length": 65,
+            "width": 65,
+            "height": 90,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 150,
+            "y": 170,
+            "rotation": 180
+          },
+          "is_accessory": false
         },
         {
           "name": "Pine Bookshelf Model 3615",
@@ -338,8 +616,18 @@
           "material": "Pine",
           "color": "Oak Finish",
           "feel": "Japanese",
-          "dimensions": {"length": 80, "width": 30, "height": 180, "unit": "cm"},
-          "position": {"x": 50, "y": 50, "rotation": 0}
+          "dimensions": {
+            "length": 80,
+            "width": 30,
+            "height": 180,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 50,
+            "y": 50,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Plywood Cabinet Model 8239",
@@ -347,8 +635,18 @@
           "material": "Plywood",
           "color": "Brown",
           "feel": "Scandinavian",
-          "dimensions": {"length": 70, "width": 40, "height": 120, "unit": "cm"},
-          "position": {"x": 250, "y": 50, "rotation": 0}
+          "dimensions": {
+            "length": 70,
+            "width": 40,
+            "height": 120,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 250,
+            "y": 50,
+            "rotation": 0
+          },
+          "is_accessory": false
         }
       ],
       "total_furniture_count": 4,
@@ -361,7 +659,11 @@
     "room_type": "living_room",
     "style": "industrial",
     "floor_plan_metadata": {
-      "room_dimensions": {"length": 5.0, "width": 4.5, "unit": "meters"},
+      "room_dimensions": {
+        "length": 5.0,
+        "width": 4.5,
+        "unit": "meters"
+      },
       "available_space": 22.5
     },
     "expected_output": {
@@ -372,8 +674,18 @@
           "material": "Steel",
           "color": "Beige",
           "feel": "Industrial",
-          "dimensions": {"length": 210, "width": 88, "height": 79, "unit": "cm"},
-          "position": {"x": 120, "y": 160, "rotation": 0}
+          "dimensions": {
+            "length": 210,
+            "width": 88,
+            "height": 79,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 120,
+            "y": 160,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Steel Table Model 3724",
@@ -381,8 +693,18 @@
           "material": "Steel",
           "color": "Walnut Finish",
           "feel": "Industrial",
-          "dimensions": {"length": 110, "width": 60, "height": 45, "unit": "cm"},
-          "position": {"x": 200, "y": 260, "rotation": 0}
+          "dimensions": {
+            "length": 110,
+            "width": 60,
+            "height": 45,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 200,
+            "y": 260,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Extendable Steel Armchair Model 2049",
@@ -390,8 +712,18 @@
           "material": "Steel",
           "color": "Gray",
           "feel": "Industrial",
-          "dimensions": {"length": 75, "width": 73, "height": 84, "unit": "cm"},
-          "position": {"x": 350, "y": 160, "rotation": 270}
+          "dimensions": {
+            "length": 75,
+            "width": 73,
+            "height": 84,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 350,
+            "y": 160,
+            "rotation": 270
+          },
+          "is_accessory": false
         },
         {
           "name": "Steel Wardrobe Model 2654",
@@ -399,8 +731,18 @@
           "material": "Steel",
           "color": "Oak Finish",
           "feel": "Industrial",
-          "dimensions": {"length": 120, "width": 55, "height": 200, "unit": "cm"},
-          "position": {"x": 50, "y": 50, "rotation": 0}
+          "dimensions": {
+            "length": 120,
+            "width": 55,
+            "height": 200,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 50,
+            "y": 50,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Wood Armchair Model 2988",
@@ -408,8 +750,18 @@
           "material": "Wood",
           "color": "Beige",
           "feel": "Industrial",
-          "dimensions": {"length": 70, "width": 70, "height": 82, "unit": "cm"},
-          "position": {"x": 400, "y": 260, "rotation": 225}
+          "dimensions": {
+            "length": 70,
+            "width": 70,
+            "height": 82,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 400,
+            "y": 260,
+            "rotation": 225
+          },
+          "is_accessory": false
         }
       ],
       "total_furniture_count": 5,
@@ -422,7 +774,11 @@
     "room_type": "living_room",
     "style": "singapore",
     "floor_plan_metadata": {
-      "room_dimensions": {"length": 4.8, "width": 3.8, "unit": "meters"},
+      "room_dimensions": {
+        "length": 4.8,
+        "width": 3.8,
+        "unit": "meters"
+      },
       "available_space": 18.24,
       "hdb_type": "3-room"
     },
@@ -434,8 +790,18 @@
           "material": "Plywood",
           "color": "Walnut Finish",
           "feel": "Contemporary",
-          "dimensions": {"length": 200, "width": 85, "height": 78, "unit": "cm"},
-          "position": {"x": 120, "y": 150, "rotation": 0}
+          "dimensions": {
+            "length": 200,
+            "width": 85,
+            "height": 78,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 120,
+            "y": 150,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Wicker Coffee Table Model 5573",
@@ -443,8 +809,18 @@
           "material": "Wicker",
           "color": "Brown",
           "feel": "Modern",
-          "dimensions": {"length": 100, "width": 55, "height": 40, "unit": "cm"},
-          "position": {"x": 180, "y": 240, "rotation": 0}
+          "dimensions": {
+            "length": 100,
+            "width": 55,
+            "height": 40,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 180,
+            "y": 240,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Bamboo Cabinet Model 1771",
@@ -452,8 +828,18 @@
           "material": "Bamboo",
           "color": "Red",
           "feel": "Modern",
-          "dimensions": {"length": 100, "width": 40, "height": 160, "unit": "cm"},
-          "position": {"x": 50, "y": 50, "rotation": 0}
+          "dimensions": {
+            "length": 100,
+            "width": 40,
+            "height": 160,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 50,
+            "y": 50,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Plywood Armchair Model 3664",
@@ -461,8 +847,18 @@
           "material": "Plywood",
           "color": "Oak Finish",
           "feel": "Minimalist",
-          "dimensions": {"length": 75, "width": 70, "height": 83, "unit": "cm"},
-          "position": {"x": 350, "y": 150, "rotation": 270}
+          "dimensions": {
+            "length": 75,
+            "width": 70,
+            "height": 83,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 350,
+            "y": 150,
+            "rotation": 270
+          },
+          "is_accessory": false
         }
       ],
       "total_furniture_count": 4,
@@ -475,7 +871,11 @@
     "room_type": "living_room",
     "style": "movie",
     "floor_plan_metadata": {
-      "room_dimensions": {"length": 6.0, "width": 4.5, "unit": "meters"},
+      "room_dimensions": {
+        "length": 6.0,
+        "width": 4.5,
+        "unit": "meters"
+      },
       "available_space": 27.0
     },
     "expected_output": {
@@ -486,8 +886,18 @@
           "material": "Leather",
           "color": "Walnut Finish",
           "feel": "Traditional",
-          "dimensions": {"length": 240, "width": 95, "height": 85, "unit": "cm"},
-          "position": {"x": 150, "y": 200, "rotation": 0}
+          "dimensions": {
+            "length": 240,
+            "width": 95,
+            "height": 85,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 150,
+            "y": 200,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Aluminum Recliner Model 4566",
@@ -495,8 +905,18 @@
           "material": "Aluminum",
           "color": "Gray",
           "feel": "Rustic",
-          "dimensions": {"length": 90, "width": 85, "height": 100, "unit": "cm"},
-          "position": {"x": 420, "y": 200, "rotation": 270}
+          "dimensions": {
+            "length": 90,
+            "width": 85,
+            "height": 100,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 420,
+            "y": 200,
+            "rotation": 270
+          },
+          "is_accessory": false
         },
         {
           "name": "Aluminum Recliner Model 4566",
@@ -504,8 +924,18 @@
           "material": "Aluminum",
           "color": "Gray",
           "feel": "Rustic",
-          "dimensions": {"length": 90, "width": 85, "height": 100, "unit": "cm"},
-          "position": {"x": 500, "y": 200, "rotation": 270}
+          "dimensions": {
+            "length": 90,
+            "width": 85,
+            "height": 100,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 500,
+            "y": 200,
+            "rotation": 270
+          },
+          "is_accessory": false
         },
         {
           "name": "Plywood Coffee Table Model 6425",
@@ -513,8 +943,18 @@
           "material": "Plywood",
           "color": "Oak Finish",
           "feel": "Contemporary",
-          "dimensions": {"length": 120, "width": 60, "height": 42, "unit": "cm"},
-          "position": {"x": 250, "y": 320, "rotation": 0}
+          "dimensions": {
+            "length": 120,
+            "width": 60,
+            "height": 42,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 250,
+            "y": 320,
+            "rotation": 0
+          },
+          "is_accessory": false
         },
         {
           "name": "Wood Cabinet Model 8784",
@@ -522,8 +962,18 @@
           "material": "Wood",
           "color": "Natural",
           "feel": "Industrial",
-          "dimensions": {"length": 180, "width": 45, "height": 60, "unit": "cm"},
-          "position": {"x": 300, "y": 50, "rotation": 0}
+          "dimensions": {
+            "length": 180,
+            "width": 45,
+            "height": 60,
+            "unit": "cm"
+          },
+          "position": {
+            "x": 300,
+            "y": 50,
+            "rotation": 0
+          },
+          "is_accessory": false
         }
       ],
       "total_furniture_count": 5,
