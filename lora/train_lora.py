@@ -14,6 +14,8 @@ from pathlib import Path
 from transformers import (
     AutoTokenizer,
     AutoModelForCausalLM,
+    AutoModelForVision2Seq,
+    AutoProcessor,
     TrainingArguments,
     Trainer,
     BitsAndBytesConfig
@@ -108,14 +110,30 @@ class LoRATrainer:
         else:
             bnb_config = None
 
-        # Load model
-        model = AutoModelForCausalLM.from_pretrained(
-            self.config.model_name,
-            quantization_config=bnb_config,
-            device_map="auto",
-            trust_remote_code=True,
-            cache_dir=self.config.cache_dir
-        )
+        # Detect model type and use appropriate class
+        model_name_lower = self.config.model_name.lower()
+        
+        # Check if it's a vision-language model
+        is_vision_model = any(keyword in model_name_lower for keyword in ['llava', 'qwen2-vl', 'llama-3.2-vision'])
+        
+        if is_vision_model:
+            print("  Detected vision-language model, using AutoModelForVision2Seq")
+            model = AutoModelForVision2Seq.from_pretrained(
+                self.config.model_name,
+                quantization_config=bnb_config,
+                device_map="auto",
+                trust_remote_code=True,
+                cache_dir=self.config.cache_dir
+            )
+        else:
+            print("  Using AutoModelForCausalLM")
+            model = AutoModelForCausalLM.from_pretrained(
+                self.config.model_name,
+                quantization_config=bnb_config,
+                device_map="auto",
+                trust_remote_code=True,
+                cache_dir=self.config.cache_dir
+            )
 
         # Prepare model for k-bit training
         if self.config.use_4bit:

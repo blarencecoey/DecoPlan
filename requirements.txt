@@ -1,14 +1,20 @@
-# Core ML libraries
+# Core ML libraries (GPU versions)
+# Install PyTorch separately first with:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+# OR for CUDA 12.1: https://download.pytorch.org/whl/cu121
+
 torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
 transformers>=4.35.0
 peft>=0.6.0
-bitsandbytes>=0.41.0
+bitsandbytes>=0.41.0  # Requires CUDA for 4-bit quantization
 accelerate>=0.24.0
 
 # Vector database and embeddings
 chromadb>=0.4.0
 sentence-transformers>=2.2.0
-faiss-cpu>=1.7.4
+faiss-gpu>=1.7.4  # Changed from faiss-cpu to faiss-gpu
 pysqlite3-binary>=0.5.0  # For ChromaDB on systems with old SQLite
 
 # Data processing
