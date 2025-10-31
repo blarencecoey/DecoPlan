@@ -1,0 +1,50 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are an expert interior designer specializing in Singapore HDB flats."
+      },
+      {
+        "role": "user",
+        "content": "Room Type: Living Room\nStyle: Minimalist\n\nRequest: I want a clean, minimalist living room with neutral colors\n\nPlease suggest furniture arrangements for this space."
+      },
+      {
+        "role": "assistant",
+        "content": "I recommend the following furniture arrangement:\n\n1. Modern Glass Cabinet Model 2021\n   - Type: Cabinet\n   - Material: Glass, Color: Beige, Style: Minimalist\n   - Is Accessory: True\n   - Dimensions: 98\u00d728\u00d7116 cm\n   - Position: x=54, y=50, rotation=0\u00b0\n2. Glass Wardrobe Model 4517\n   - Type: Wardrobe\n   - Material: Glass, Color: Yellow, Style: Minimalist\n   - Is Accessory: True\n   - Dimensions: 104\u00d7194\u00d7142 cm\n   - Position: x=50, y=72, rotation=0\u00b0\n3. Eco Fabric Desk Model 9131\n   - Type: Desk\n   - Material: Fabric, Color: Gray, Style: Minimalist\n   - Is Accessory: False\n   - Dimensions: 133\u00d757\u00d728 cm\n   - Position: x=50, y=106, rotation=270\u00b0\n4. Fabric Nightstand Model 4928\n   - Type: Nightstand\n   - Material: Fabric, Color: Yellow, Style: Minimalist\n   - Is Accessory: False\n   - Dimensions: 89\u00d779\u00d7178 cm\n   - Position: x=50, y=139, rotation=0\u00b0\n5. Fabric Cabinet Model 6690\n   - Type: Cabinet\n   - Material: Fabric, Color: Gray, Style: Minimalist\n   - Is Accessory: False\n   - Dimensions: 197\u00d759\u00d715 cm\n   - Position: x=103, y=50, rotation=0\u00b0\n6. Deluxe Fabric Cabinet Model 9530\n   - Type: Cabinet\n   - Material: Fabric, Color: Blue, Style: Minimalist\n   - Is Accessory: False\n   - Dimensions: 128\u00d716\u00d7187 cm\n   - Position: x=109, y=97, rotation=0\u00b0\n7. Eco Glass Desk Model 9975\n   - Type: Desk\n   - Material: Glass, Color: Beige, Style: Minimalist\n   - Is Accessory: True\n   - Dimensions: 16\u00d728\u00d710 cm\n   - Position: x=58, y=97, rotation=180\u00b0\n8. Compact Teak Cabinet Model 6387\n   - Type: Cabinet\n   - Material: Teak, Color: Natural, Style: Minimalist\n   - Is Accessory: True\n   - Dimensions: 10\u00d725\u00d715 cm\n   - Position: x=95, y=74, rotation=0\u00b0\n9. Compact Fabric Desk Model 1377\n   - Type: Desk\n   - Material: Fabric, Color: Red, Style: Minimalist\n   - Is Accessory: True\n   - Dimensions: 102\u00d743\u00d7191 cm\n   - Position: x=55, y=62, rotation=180\u00b0\n10. Glass Desk Model 2026\n   - Type: Desk\n   - Material: Glass, Color: Gray, Style: Minimalist\n   - Is Accessory: False\n   - Dimensions: 102\u00d7121\u00d788 cm\n   - Position: x=100, y=80, rotation=180\u00b0\n\nTotal Furniture Items: 10\n\nDesign Notes: Clean lines, minimal clutter, and functional design, 10 carefully selected pieces for optimal room function"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are an expert interior designer specializing in Singapore HDB flats."
+      },
+      {
+        "role": "user",
+        "content": "Room Type: Living Room\nStyle: Modern\n\nRequest: Create a modern living room setup for my 4-room HDB\n\nPlease suggest furniture arrangements for this space."
+      },
+      {
+        "role": "assistant",
+        "content": "I recommend the following furniture arrangement:\n\n1. Vintage Plywood Nightstand Model 5110\n   - Type: Nightstand\n   - Material: Plywood, Color: Blue, Style: Modern\n   - Is Accessory: False\n   - Dimensions: 184\u00d795\u00d746 cm\n   - Position: x=61, y=207, rotation=0\u00b0\n2. Modern Plywood Nightstand Model 2413\n   - Type: Nightstand\n   - Material: Plywood, Color: Gray, Style: Traditional\n   - Is Accessory: True\n   - Dimensions: 75\u00d759\u00d7188 cm\n   - Position: x=50, y=163, rotation=0\u00b0\n3. Compact Plywood Nightstand Model 7027\n   - Type: Nightstand\n   - Material: Plywood, Color: Beige, Style: Minimalist\n   - Is Accessory: True\n   - Dimensions: 190\u00d781\u00d764 cm\n   - Position: x=87, y=183, rotation=0\u00b0\n4. Plywood Nightstand Model 4008\n   - Type: Nightstand\n   - Material: Plywood, Color: Blue, Style: Contemporary\n   - Is Accessory: True\n   - Dimensions: 85\u00d7113\u00d7171 cm\n   - Position: x=70, y=106, rotation=0\u00b0\n5. Vintage Plywood Nightstand Model 2646\n   - Type: Nightstand\n   - Material: Plywood, Color: Black, Style: Minimalist\n   - Is Accessory: True\n   - Dimensions: 161\u00d7111\u00d7123 cm\n   - Position: x=90, y=114, rotation=0\u00b0\n6. Wood Nightstand Model 5064\n   - Type: Nightstand\n   - Material: Wood, Color: White, Style: Minimalist\n   - Is Accessory: True\n   - Dimensions: 184\u00d7187\u00d712 cm\n   - Position: x=68, y=109, rotation=0\u00b0\n7. Plywood Nightstand Model 3269\n   - Type: Nightstand\n   - Material: Plywood, Color: Gray, Style: Contemporary\n   - Is Accessory: True\n   - Dimensions: 82\u00d710\u00d798 cm\n   - Position: x=82, y=171, rotation=0\u00b0\n\nTotal Furniture Items: 7\n\nDesign Notes: Contemporary aesthetic with sleek, modern pieces, 7 carefully selected pieces for optimal room function"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are an expert interior designer specializing in Singapore HDB flats."
+      },
+      {
+        "role": "user",
+        "content": "Room Type: Living Room\nStyle: Minimalist\n\nRequest: Design a simple living area that doesn't feel cluttered\n\nPlease suggest furniture arrangements for this space."
+      },
+      {
+        "role": "assistant",
+        "content": "I recommend the following furniture arrangement:\n\n1. Wicker Desk Model 5092\n   - Type: Desk\n   - Material: Wicker, Color: Black, Style: Minimalist\n   - Is Accessory: True\n   - Dimensions: 84\u00d786\u00d7133 cm\n   - Position: x=79, y=94, rotation=180\u00b0\n2. Glass Desk Model 2026\n   - Type: Desk\n   - Material: Glass, Color: Gray, Style: Minimalist\n   - Is Accessory: False\n   - Dimensions: 102\u00d7121\u00d788 cm\n   - Position: x=121, y=80, rotation=90\u00b0\n3. Slim Fabric Desk Model 7932\n   - Type: Desk\n   - Material: Fabric, Color: Mahogany, Style: Minimalist\n   - Is Accessory: True\n   - Dimensions: 28\u00d732\u00d788 cm\n   - Position: x=98, y=67, rotation=90\u00b0\n4. Compact Fabric Desk Model 1377\n   - Type: Desk\n   - Material: Fabric, Color: Red, Style: Minimalist\n   - Is Accessory: True\n   - Dimensions: 102\u00d743\u00d7191 cm\n   - Position: x=84, y=51, rotation=180\u00b0\n5. Classic Wood Desk Model 3973\n   - Type: Desk\n   - Material: Wood, Color: Yellow, Style: Minimalist\n   - Is Accessory: False\n   - Dimensions: 109\u00d735\u00d791 cm\n   - Position: x=51, y=88, rotation=180\u00b0\n6. Fabric Desk Model 9306\n   - Type: Desk\n   - Material: Fabric, Color: White, Style: Minimalist\n   - Is Accessory: True\n   - Dimensions: 80\u00d737\u00d7120 cm\n   - Position: x=89, y=128, rotation=270\u00b0\n7. Eco Fabric Desk Model 9131\n   - Type: Desk\n   - Material: Fabric, Color: Gray, Style: Minimalist\n   - Is Accessory: False\n   - Dimensions: 133\u00d757\u00d728 cm\n   - Position: x=84, y=88, rotation=180\u00b0\n\nTotal Furniture Items: 7\n\nDesign Notes: Clean lines, minimal clutter, and functional design, 7 carefully selected pieces for optimal room function"
+      }
+    ]
+  }
+]
