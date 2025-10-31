@@ -15,7 +15,6 @@ from transformers import (
     AutoTokenizer,
     AutoModelForCausalLM,
     AutoModelForVision2Seq,
-    AutoProcessor,
     TrainingArguments,
     Trainer,
     BitsAndBytesConfig
@@ -299,7 +298,7 @@ class LoRATrainer:
             logging_steps=self.config.logging_steps,
             save_steps=self.config.save_steps,
             eval_steps=self.config.eval_steps if val_dataset else None,
-            evaluation_strategy="steps" if val_dataset else "no",
+            eval_strategy="steps" if val_dataset else "no",  # Changed from evaluation_strategy
             save_strategy="steps",
             load_best_model_at_end=val_dataset is not None,
             optim=self.config.optim,
