@@ -18,3 +18,11 @@ export interface RAGResponse {
   totalResults: number;
   processingTime?: number;
 }
+
+export interface FurnitureFilters {
+  furnitureTypes?: string[];
+  styles?: string[];
+  minPrice?: number;
+  maxPrice?: number;
+  roomType?: string;
+}

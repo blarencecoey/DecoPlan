@@ -4,15 +4,17 @@ import { DesignCard } from './DesignCard';
 import { Clock, Search, SlidersHorizontal, RefreshCw } from 'lucide-react';
 import { Alert, AlertDescription } from './ui/alert';
 import { Button } from './ui/button';
+import { Badge } from './ui/badge';
 
 interface ResultsDisplayProps {
   results: RAGResponse | null;
   error: string | null;
   onFilterClick: () => void;
   onRefresh: () => void;
+  activeFiltersCount?: number;
 }
 
-export function ResultsDisplay({ results, error, onFilterClick, onRefresh }: ResultsDisplayProps) {
+export function ResultsDisplay({ results, error, onFilterClick, onRefresh, activeFiltersCount = 0 }: ResultsDisplayProps) {
   if (error) {
     return (
       <section className="py-12 px-6">
@@ -83,10 +85,15 @@ export function ResultsDisplay({ results, error, onFilterClick, onRefresh }: Res
             </Button>
             <Button
               onClick={onFilterClick}
-              className="bg-gradient-to-r from-[#D4735E] to-[#C96A54] hover:from-[#C96A54] hover:to-[#D4735E] text-white shadow-lg shadow-[#D4735E]/30 backdrop-blur-xl"
+              className="bg-gradient-to-r from-[#D4735E] to-[#C96A54] hover:from-[#C96A54] hover:to-[#D4735E] text-white shadow-lg shadow-[#D4735E]/30 backdrop-blur-xl relative"
             >
               <SlidersHorizontal className="w-4 h-4 mr-2" />
               Filters
+              {activeFiltersCount > 0 && (
+                <Badge className="ml-2 bg-white text-[#D4735E] hover:bg-white">
+                  {activeFiltersCount}
+                </Badge>
+              )}
             </Button>
           </div>
         </motion.div>

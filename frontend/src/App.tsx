@@ -18,11 +18,14 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const [selectedFurnitureTypes, setSelectedFurnitureTypes] = useState<string[]>([]);
+  const [currentPrompt, setCurrentPrompt] = useState<string>('');
 
-  const handleSearch = async (prompt: string) => {
+  const handleSearch = async (prompt: string, furnitureTypes?: string[]) => {
     setIsLoading(true);
     setError(null);
     setLoadingProgress(0);
+    setCurrentPrompt(prompt);
 
     // Simulate progress
     const progressInterval = setInterval(() => {
@@ -36,7 +39,7 @@ export default function App() {
     }, 150);
 
     try {
-      const data = await getFurnitureRecommendations(prompt);
+      const data = await getFurnitureRecommendations(prompt, furnitureTypes || selectedFurnitureTypes);
       setResults(data);
       setLoadingProgress(100);
       toast.success(`Found ${data.totalResults} perfect furniture pieces!`, {
@@ -68,6 +71,38 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setResults(null);
     setError(null);
+    setSelectedFurnitureTypes([]);
+    setCurrentPrompt('');
+  };
+
+  const handleFurnitureTypeToggle = (type: string) => {
+    setSelectedFurnitureTypes((prev) => {
+      if (prev.includes(type)) {
+        return prev.filter((t) => t !== type);
+      }
+      return [...prev, type];
+    });
+  };
+
+  const handleApplyFilters = () => {
+    if (currentPrompt) {
+      handleSearch(currentPrompt, selectedFurnitureTypes);
+      setIsFilterOpen(false);
+    } else {
+      toast.info('Please enter a search prompt first', {
+        description: 'Describe your dream space to get started',
+      });
+    }
+  };
+
+  const handleResetFilters = () => {
+    setSelectedFurnitureTypes([]);
+    if (currentPrompt) {
+      handleSearch(currentPrompt, []);
+    }
+    toast.info('Filters reset', {
+      description: 'Showing all furniture types',
+    });
   };
 
   const handleRefresh = () => {
@@ -110,10 +145,18 @@ export default function App() {
         error={error}
         onFilterClick={() => setIsFilterOpen(true)}
         onRefresh={handleRefresh}
+        activeFiltersCount={selectedFurnitureTypes.length}
       />
 
       {/* Filter Panel */}
-      <FilterPanel isOpen={isFilterOpen} onClose={() => setIsFilterOpen(false)} />
+      <FilterPanel
+        isOpen={isFilterOpen}
+        onClose={() => setIsFilterOpen(false)}
+        selectedFurnitureTypes={selectedFurnitureTypes}
+        onFurnitureTypeToggle={handleFurnitureTypeToggle}
+        onApplyFilters={handleApplyFilters}
+        onResetFilters={handleResetFilters}
+      />
 
       {/* Floating Action Button */}
       {results && <FloatingActionButton onClick={handleNewConsultation} />}

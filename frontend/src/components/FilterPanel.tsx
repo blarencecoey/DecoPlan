@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { X, SlidersHorizontal, DollarSign, Home, Palette } from 'lucide-react';
+import { X, SlidersHorizontal, DollarSign, Home, Palette, Armchair } from 'lucide-react';
 import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { Slider } from './ui/slider';
@@ -9,13 +9,25 @@ import { Separator } from './ui/separator';
 interface FilterPanelProps {
   isOpen: boolean;
   onClose: () => void;
+  selectedFurnitureTypes?: string[];
+  onFurnitureTypeToggle?: (type: string) => void;
+  onApplyFilters?: () => void;
+  onResetFilters?: () => void;
 }
 
 const roomTypes = ['Living Room', 'Bedroom', 'Kitchen', 'Dining', 'Study', 'Bathroom'];
 const styles = ['Modern', 'Scandinavian', 'Japanese', 'Industrial', 'Bohemian', 'Minimalist'];
 const flatSizes = ['2-Room', '3-Room', '4-Room', '5-Room', 'Executive'];
+const furnitureTypes = ['Sofa', 'Chair', 'Armchair', 'Table', 'Dining Table', 'Coffee Table', 'Desk', 'Bed', 'Wardrobe', 'Dresser', 'Bookshelf', 'Cabinet', 'Nightstand', 'Bench', 'Stool', 'Recliner'];
 
-export function FilterPanel({ isOpen, onClose }: FilterPanelProps) {
+export function FilterPanel({
+  isOpen,
+  onClose,
+  selectedFurnitureTypes = [],
+  onFurnitureTypeToggle,
+  onApplyFilters,
+  onResetFilters
+}: FilterPanelProps) {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -43,10 +55,41 @@ export function FilterPanel({ isOpen, onClose }: FilterPanelProps) {
                 <div className="flex items-center gap-2">
                   <SlidersHorizontal className="w-5 h-5 text-[#D4735E]" />
                   <h2 className="text-xl text-gray-900">Refine Your Search</h2>
+                  {selectedFurnitureTypes.length > 0 && (
+                    <Badge className="bg-[#D4735E] text-white">
+                      {selectedFurnitureTypes.length} selected
+                    </Badge>
+                  )}
                 </div>
                 <Button variant="ghost" size="icon" onClick={onClose} className="rounded-full">
                   <X className="w-5 h-5" />
                 </Button>
+              </div>
+
+              <Separator />
+
+              {/* Furniture Type */}
+              <div className="space-y-3">
+                <Label className="flex items-center gap-2">
+                  <Armchair className="w-4 h-4 text-[#A8B5A0]" />
+                  Furniture Type
+                </Label>
+                <div className="flex flex-wrap gap-2">
+                  {furnitureTypes.map((type) => (
+                    <Badge
+                      key={type}
+                      variant="outline"
+                      onClick={() => onFurnitureTypeToggle?.(type)}
+                      className={`cursor-pointer transition-all ${
+                        selectedFurnitureTypes.includes(type)
+                          ? 'bg-[#D4735E]/20 border-[#D4735E] text-[#D4735E]'
+                          : 'bg-white/20 backdrop-blur-xl border-white/30 hover:bg-white/40 hover:border-white/50'
+                      }`}
+                    >
+                      {type}
+                    </Badge>
+                  ))}
+                </div>
               </div>
 
               <Separator />
@@ -136,10 +179,17 @@ export function FilterPanel({ isOpen, onClose }: FilterPanelProps) {
 
               {/* Actions */}
               <div className="pt-6 space-y-3">
-                <Button className="w-full bg-gradient-to-r from-[#D4735E] to-[#C96A54] hover:from-[#C96A54] hover:to-[#D4735E] text-white">
+                <Button
+                  onClick={onApplyFilters}
+                  className="w-full bg-gradient-to-r from-[#D4735E] to-[#C96A54] hover:from-[#C96A54] hover:to-[#D4735E] text-white"
+                >
                   Apply Filters
                 </Button>
-                <Button variant="outline" className="w-full">
+                <Button
+                  variant="outline"
+                  onClick={onResetFilters}
+                  className="w-full"
+                >
                   Reset All
                 </Button>
               </div>

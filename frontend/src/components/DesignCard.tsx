@@ -109,8 +109,8 @@ export function DesignCard({ item, index }: DesignCardProps) {
           {/* Footer */}
           <div className="pt-4 border-t border-gray-200/50 flex items-center justify-between">
             <div>
-              <div className="text-sm text-gray-500">Starting from</div>
-              <div className="text-2xl text-gray-900">${item.price.toFixed(2)}</div>
+              {/* <div className="text-sm text-gray-500">Starting from</div>
+              <div className="text-2xl text-gray-900">${item.price.toFixed(2)}</div> */}
             </div>
             <Button
               size="sm"

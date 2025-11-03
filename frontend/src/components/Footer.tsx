@@ -11,7 +11,7 @@ export function Footer() {
               <div className="w-8 h-8 bg-gradient-to-br from-[#D4735E] to-[#C96A54] rounded-lg flex items-center justify-center">
                 <span className="text-white">D</span>
               </div>
-              <span className="text-xl text-gray-800">DecoPlan</span>
+              <span className="text-xl text-gray-800">Homemah</span>
             </div>
             <p className="text-sm text-gray-600">
               Transform your HDB into your dream home with AI-powered interior design recommendations.
@@ -75,7 +75,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/20 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-600">
-            © 2025 DecoPlan. All rights reserved.
+            © 2025 Homemah. All rights reserved.
           </p>
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <Sparkles className="w-4 h-4 text-[#D4735E]" />

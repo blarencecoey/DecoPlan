@@ -11,7 +11,7 @@ export function Navigation() {
             <div className="w-9 h-9 bg-gradient-to-br from-[#D4735E] to-[#C96A54] rounded-xl flex items-center justify-center shadow-lg shadow-[#D4735E]/20">
               <span className="text-white font-semibold">D</span>
             </div>
-            <span className="text-xl text-gray-900">DecoPlan</span>
+            <span className="text-xl text-gray-900">Homemah</span>
           </div>
 
           {/* Menu Items */}

@@ -126,7 +126,8 @@ def get_recommendations():
 
     Request body:
     {
-        "prompt": "I want a cozy minimalist bedroom"
+        "prompt": "I want a cozy minimalist bedroom",
+        "furniture_types": ["Sofa", "Chair", "Table"]  # optional
     }
 
     Response format matches frontend RAGResponse interface
@@ -145,15 +146,71 @@ def get_recommendations():
             return jsonify({"error": "Missing required field: prompt"}), 400
 
         prompt = data['prompt']
-        n_results = data.get('n_results', 15)
+        n_results_requested = data.get('n_results', 15)
         filters = data.get('filters', {})
 
-        # Perform retrieval
-        results = retriever.retrieve(
-            query=prompt,
-            n_results=n_results,
-            filters=filters
-        )
+        # Handle furniture_types filtering
+        furniture_types = data.get('furniture_types', [])
+        logger.info(f"Received furniture_types: {furniture_types}")
+
+        # Mapping of general types to specific patterns in the database
+        type_patterns = {
+            'Bed': ['Bed', 'Bed frame', 'Day-bed', 'Bunk bed', 'Loft bed', 'Divan bed',
+                   'Ottoman bed', 'Stackable bed', 'Upholstered bed', 'Four-poster bed',
+                   'Reversible bed', 'Extendable bed', 'Ext bed'],
+            'Wardrobe': ['Wardrobe'],
+            'Table': ['Table'],
+            'Dining Table': ['Dining Table'],
+            'Coffee Table': ['Coffee Table'],
+            'Desk': ['Desk'],
+            'Chair': ['Chair'],
+            'Armchair': ['Armchair'],
+            'Sofa': ['Sofa'],
+            'Bench': ['Bench'],
+            'Stool': ['Stool'],
+            'Bookshelf': ['Bookshelf', 'Bookcase'],
+            'Dresser': ['Dresser'],
+            'Cabinet': ['Cabinet'],
+            'Nightstand': ['Nightstand'],
+            'Recliner': ['Recliner']
+        }
+
+        # If furniture types are specified, retrieve more results and filter in Python
+        if furniture_types and len(furniture_types) > 0:
+            # Get all matching patterns for selected types
+            matching_patterns = []
+            for ftype in furniture_types:
+                if ftype in type_patterns:
+                    matching_patterns.extend(type_patterns[ftype])
+
+            logger.info(f"Matching patterns: {matching_patterns}")
+
+            # Retrieve more results to ensure we get enough after filtering
+            all_results = retriever.retrieve(
+                query=prompt,
+                n_results=n_results_requested * 3,  # Get 3x more to filter
+                filters=filters if filters else None
+            )
+
+            # Filter results based on patterns
+            results = []
+            for item in all_results:
+                item_type = item.get('furniture_type', '')
+                # Check if item's furniture_type starts with any of the matching patterns
+                if any(item_type.startswith(pattern) for pattern in matching_patterns):
+                    results.append(item)
+                    if len(results) >= n_results_requested:
+                        break
+
+            logger.info(f"Filtered to {len(results)} results from {len(all_results)} total")
+        else:
+            # No filtering, retrieve normally
+            results = retriever.retrieve(
+                query=prompt,
+                n_results=n_results_requested,
+                filters=filters if filters else None
+            )
+            logger.info(f"Retrieved {len(results)} results without filtering")
 
         # Transform results to match frontend FurnitureItem interface
         recommendations = []
