@@ -414,7 +414,7 @@ Tested with:
 ## Credits
 
 Implementation by: DecoPlan Team
-Date: October 2024
+Date: October 2025
 Version: 1.0.0
 
 For questions or issues, please refer to:
