@@ -14,8 +14,15 @@ except ImportError:
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
+import sys
+from pathlib import Path
 from typing import Dict, List, Any
 import logging
+
+# Add backend directory to path for imports (must be before RAG imports)
+backend_dir = Path(__file__).resolve().parent.parent
+if str(backend_dir) not in sys.path:
+    sys.path.insert(0, str(backend_dir))
 
 # Import RAG components
 from rag.furniture_retriever import FurnitureRetriever
@@ -32,7 +39,8 @@ CORS(app)  # Enable CORS for frontend integration
 # Global variables for RAG components
 retriever = None
 rag_inference = None
-DB_PATH = "./furniture_db"
+# Update path to point to data/furniture_db
+DB_PATH = str(Path(__file__).parent.parent.parent / "data" / "furniture_db")
 
 
 def initialize_rag_components():

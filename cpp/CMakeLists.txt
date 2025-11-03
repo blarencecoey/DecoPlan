@@ -28,8 +28,8 @@ set(LLAMA_BUILD_TESTS OFF CACHE BOOL "Disable llama.cpp tests")
 set(LLAMA_BUILD_EXAMPLES OFF CACHE BOOL "Disable llama.cpp examples")
 set(LLAMA_BUILD_SERVER OFF CACHE BOOL "Disable llama.cpp server")
 
-# Add llama.cpp
-add_subdirectory(external/llama.cpp)
+# Add llama.cpp (now at project root)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../external/llama.cpp ${CMAKE_CURRENT_BINARY_DIR}/llama.cpp)
 
 # DecoPlan LLM Library
 add_library(decoplan_llm
@@ -41,9 +41,9 @@ target_include_directories(decoplan_llm
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
     PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/external/llama.cpp/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/external/llama.cpp/common
-        ${CMAKE_CURRENT_SOURCE_DIR}/external/llama.cpp/ggml/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/../external/llama.cpp/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/../external/llama.cpp/common
+        ${CMAKE_CURRENT_SOURCE_DIR}/../external/llama.cpp/ggml/include
 )
 
 target_link_libraries(decoplan_llm

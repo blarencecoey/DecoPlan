@@ -152,16 +152,21 @@ class FurnitureVectorDB:
 
 def main():
     parser = argparse.ArgumentParser(description="Build furniture vector database for RAG")
+    # Default paths relative to project root
+    project_root = Path(__file__).parent.parent.parent
+    default_csv = str(project_root / "data" / "datasets" / "Input" / "Furniture Dataset - Furniture Data.csv")
+    default_db = str(project_root / "data" / "furniture_db")
+
     parser.add_argument(
         "--furniture_csv",
         type=str,
-        default="datasets/Input/Furniture Dataset - Furniture Data.csv",
+        default=default_csv,
         help="Path to furniture CSV file"
     )
     parser.add_argument(
         "--db_path",
         type=str,
-        default="./furniture_db",
+        default=default_db,
         help="Path to store the vector database"
     )
     parser.add_argument(

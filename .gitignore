@@ -10,6 +10,7 @@ weights/
 checkpoints/
 
 # Build artifacts
+cpp/build/
 build/
 bin/
 obj/
@@ -53,9 +54,9 @@ DerivedData/
 data/raw/
 data/processed/
 # Keep source datasets but exclude generated ones
-datasets/Output/lora_splits/
-datasets/Output/lora_training_data.json
-datasets/Output/rag_enhanced_prompts.json
+data/datasets/Output/lora_splits/
+data/datasets/Output/lora_training_data.json
+data/datasets/Output/rag_enhanced_prompts.json
 floorplans/
 training_data/
 
@@ -84,13 +85,13 @@ env/
 *.ipynb_checkpoints
 
 # RAG vector database (generated)
-furniture_db/
+data/furniture_db/
 
 # Evaluation results
 evaluation/
 
-# IDE files
-.vscode/
+# IDE files (keep config/ directory but ignore generated IDE files)
+config/.vscode/
 .idea/
 *.sublime-*
 .atom/
