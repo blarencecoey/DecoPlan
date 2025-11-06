@@ -1,4 +1,4 @@
-<img width="1536" height="1024" alt="DecoPLanLLM" src="assets/DecoPLanLLM.png" />
+<img width="460.8" height="307.2" alt="DecoPLanLLM" src="assets/DecoPLanLLM.png" />
 
 # DecoPlan LLM
 
