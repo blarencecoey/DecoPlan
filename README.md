@@ -1,3 +1,5 @@
+<img width="1536" height="1024" alt="DecoPLanLLM" src="assets/DecoPLanLLM.png" />
+
 # DecoPlan LLM
 
 AI-powered interior design assistant for Singapore BTOs and HDB layouts using multimodal vision-language models with **RAG (Retrieval-Augmented Generation)** and **LoRA (Low-Rank Adaptation)**.
