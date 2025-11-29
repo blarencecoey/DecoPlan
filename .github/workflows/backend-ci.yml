@@ -1,0 +1,51 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-ci.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-ci.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.8'
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # Install CPU versions for CI (no CUDA in GitHub runners)
+        pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+        # Install other dependencies, excluding GPU-specific ones
+        pip install transformers peft accelerate
+        pip install chromadb sentence-transformers
+        pip install pandas numpy scikit-learn Pillow
+        pip install datasets tqdm
+        pip install flask flask-cors
+        pip install pytest black
+
+    - name: Run linting
+      run: |
+        cd backend
+        black --check .
+      continue-on-error: true
+
+    - name: Run tests
+      run: |
+        cd backend
+        python -m pytest tests/ -v
