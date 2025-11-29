@@ -5,9 +5,10 @@ Furniture retrieval module for RAG system.
 
 # Fix SQLite version for ChromaDB (must be before any chromadb imports)
 try:
-    __import__('pysqlite3')
+    __import__("pysqlite3")
     import sys
-    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
 except ImportError:
     pass  # pysqlite3 not installed, will use system sqlite3
 
@@ -22,7 +23,9 @@ import json
 class FurnitureRetriever:
     """Retrieve relevant furniture from vector database based on user queries."""
 
-    def __init__(self, db_path: str = "./furniture_db", model_name: str = "all-MiniLM-L6-v2"):
+    def __init__(
+        self, db_path: str = "./furniture_db", model_name: str = "all-MiniLM-L6-v2"
+    ):
         """
         Initialize the furniture retriever.
 
@@ -42,14 +45,13 @@ class FurnitureRetriever:
 
         # Initialize ChromaDB client
         self.client = chromadb.PersistentClient(
-            path=str(self.db_path),
-            settings=Settings(anonymized_telemetry=False)
+            path=str(self.db_path), settings=Settings(anonymized_telemetry=False)
         )
 
         # Load statistics if available
         stats_path = self.db_path / "stats.json"
         if stats_path.exists():
-            with open(stats_path, 'r') as f:
+            with open(stats_path, "r") as f:
                 self.stats = json.load(f)
         else:
             self.stats = {}
@@ -59,7 +61,7 @@ class FurnitureRetriever:
         query: str,
         n_results: int = 10,
         collection_name: str = "furniture_catalog",
-        filters: Optional[Dict] = None
+        filters: Optional[Dict] = None,
     ) -> List[Dict]:
         """
         Retrieve relevant furniture based on query.
@@ -86,26 +88,29 @@ class FurnitureRetriever:
 
         # Query the database
         results = collection.query(
-            query_embeddings=[query_embedding],
-            n_results=n_results,
-            where=where_clause
+            query_embeddings=[query_embedding], n_results=n_results, where=where_clause
         )
 
         # Format results
         formatted_results = []
-        for i in range(len(results['ids'][0])):
-            formatted_results.append({
-                'id': results['ids'][0][i],
-                'name': results['metadatas'][0][i]['name'],
-                'furniture_type': results['metadatas'][0][i]['furniture_type'],
-                'material': results['metadatas'][0][i]['material'],
-                'color': results['metadatas'][0][i]['color'],
-                'feel': results['metadatas'][0][i]['feel'],
-                'is_accessory': results['metadatas'][0][i].get('is_accessory', 'N/A'),
-                'dimensions': results['metadatas'][0][i].get('dimensions', 'N/A'),
-                'description': results['documents'][0][i],
-                'relevance_score': 1 - results['distances'][0][i]  # Convert distance to similarity
-            })
+        for i in range(len(results["ids"][0])):
+            formatted_results.append(
+                {
+                    "id": results["ids"][0][i],
+                    "name": results["metadatas"][0][i]["name"],
+                    "furniture_type": results["metadatas"][0][i]["furniture_type"],
+                    "material": results["metadatas"][0][i]["material"],
+                    "color": results["metadatas"][0][i]["color"],
+                    "feel": results["metadatas"][0][i]["feel"],
+                    "is_accessory": results["metadatas"][0][i].get(
+                        "is_accessory", "N/A"
+                    ),
+                    "dimensions": results["metadatas"][0][i].get("dimensions", "N/A"),
+                    "description": results["documents"][0][i],
+                    "relevance_score": 1
+                    - results["distances"][0][i],  # Convert distance to similarity
+                }
+            )
 
         return formatted_results
 
@@ -114,7 +119,7 @@ class FurnitureRetriever:
         style: str,
         room_type: str,
         n_results: int = 10,
-        collection_name: str = "furniture_catalog"
+        collection_name: str = "furniture_catalog",
     ) -> Dict[str, List[Dict]]:
         """
         Retrieve furniture grouped by type for a specific style and room.
@@ -135,13 +140,13 @@ class FurnitureRetriever:
         results = self.retrieve(
             query=query,
             n_results=n_results * 2,  # Get more to ensure variety
-            collection_name=collection_name
+            collection_name=collection_name,
         )
 
         # Group by furniture type
         grouped = {}
         for item in results:
-            ftype = item['furniture_type']
+            ftype = item["furniture_type"]
             if ftype not in grouped:
                 grouped[ftype] = []
             if len(grouped[ftype]) < 3:  # Limit per type
@@ -155,7 +160,7 @@ class FurnitureRetriever:
         room_type: str,
         style: str,
         n_results: int = 15,
-        collection_name: str = "furniture_catalog"
+        collection_name: str = "furniture_catalog",
     ) -> str:
         """
         Retrieve furniture and format as context for LLM.
@@ -175,9 +180,7 @@ class FurnitureRetriever:
 
         # Retrieve furniture
         results = self.retrieve(
-            query=enhanced_query,
-            n_results=n_results,
-            collection_name=collection_name
+            query=enhanced_query, n_results=n_results, collection_name=collection_name
         )
 
         # Format as context
@@ -209,19 +212,13 @@ def main():
         "--query",
         type=str,
         default="minimalist living room with neutral colors",
-        help="Query to test"
+        help="Query to test",
     )
     parser.add_argument(
-        "--db_path",
-        type=str,
-        default="./furniture_db",
-        help="Path to vector database"
+        "--db_path", type=str, default="./furniture_db", help="Path to vector database"
     )
     parser.add_argument(
-        "--n_results",
-        type=int,
-        default=10,
-        help="Number of results to retrieve"
+        "--n_results", type=int, default=10, help="Number of results to retrieve"
     )
 
     args = parser.parse_args()
@@ -238,8 +235,12 @@ def main():
     for i, item in enumerate(results, 1):
         print(f"\n{i}. {item['name']}")
         print(f"   Type: {item['furniture_type']}")
-        print(f"   Material: {item['material']}, Color: {item['color']}, Style: {item['feel']}")
-        print(f"   Dimensions: {item['dimensions']}, Is Accessory: {item['is_accessory']}")
+        print(
+            f"   Material: {item['material']}, Color: {item['color']}, Style: {item['feel']}"
+        )
+        print(
+            f"   Dimensions: {item['dimensions']}, Is Accessory: {item['is_accessory']}"
+        )
         print(f"   Relevance: {item['relevance_score']:.4f}")
 
     print("\n" + "=" * 80)

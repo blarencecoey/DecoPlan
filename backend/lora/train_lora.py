@@ -17,7 +17,7 @@ from transformers import (
     AutoModelForVision2Seq,
     TrainingArguments,
     Trainer,
-    BitsAndBytesConfig
+    BitsAndBytesConfig,
 )
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 from datasets import load_dataset, Dataset
@@ -111,10 +111,13 @@ class LoRATrainer:
 
         # Detect model type and use appropriate class
         model_name_lower = self.config.model_name.lower()
-        
+
         # Check if it's a vision-language model
-        is_vision_model = any(keyword in model_name_lower for keyword in ['llava', 'qwen2-vl', 'llama-3.2-vision'])
-        
+        is_vision_model = any(
+            keyword in model_name_lower
+            for keyword in ["llava", "qwen2-vl", "llama-3.2-vision"]
+        )
+
         if is_vision_model:
             print("  Detected vision-language model, using AutoModelForVision2Seq")
             model = AutoModelForVision2Seq.from_pretrained(
@@ -122,7 +125,7 @@ class LoRATrainer:
                 quantization_config=bnb_config,
                 device_map="auto",
                 trust_remote_code=True,
-                cache_dir=self.config.cache_dir
+                cache_dir=self.config.cache_dir,
             )
         else:
             print("  Using AutoModelForCausalLM")
@@ -131,7 +134,7 @@ class LoRATrainer:
                 quantization_config=bnb_config,
                 device_map="auto",
                 trust_remote_code=True,
-                cache_dir=self.config.cache_dir
+                cache_dir=self.config.cache_dir,
             )
 
         # Prepare model for k-bit training
@@ -142,7 +145,7 @@ class LoRATrainer:
         tokenizer = AutoTokenizer.from_pretrained(
             self.config.model_name,
             trust_remote_code=True,
-            cache_dir=self.config.cache_dir
+            cache_dir=self.config.cache_dir,
         )
 
         if tokenizer.pad_token is None:
@@ -186,7 +189,9 @@ class LoRATrainer:
         print(f"  LoRA Configuration:")
         print(f"    r={self.config.lora_r}, alpha={self.config.lora_alpha}")
         print(f"    Target modules: {self.config.lora_target_modules}")
-        print(f"  Trainable params: {trainable_params:,} ({100 * trainable_params / all_param:.2f}%)")
+        print(
+            f"  Trainable params: {trainable_params:,} ({100 * trainable_params / all_param:.2f}%)"
+        )
         print(f"  Total params: {all_param:,}")
 
         return model
@@ -204,12 +209,12 @@ class LoRATrainer:
         print("\nLoading datasets...")
 
         # Load JSON files
-        with open(self.config.train_data, 'r') as f:
+        with open(self.config.train_data, "r") as f:
             train_data = json.load(f)
 
         val_data = None
         if self.config.val_data and Path(self.config.val_data).exists():
-            with open(self.config.val_data, 'r') as f:
+            with open(self.config.val_data, "r") as f:
                 val_data = json.load(f)
 
         print(f"  Training examples: {len(train_data)}")
@@ -227,9 +232,7 @@ class LoRATrainer:
                 messages = examples["messages"]
                 # Format as chat template
                 text = tokenizer.apply_chat_template(
-                    messages,
-                    tokenize=False,
-                    add_generation_prompt=False
+                    messages, tokenize=False, add_generation_prompt=False
                 )
             # Handle Alpaca format
             elif "instruction" in examples:
@@ -255,14 +258,14 @@ class LoRATrainer:
         train_dataset = train_dataset.map(
             tokenize_function,
             remove_columns=train_dataset.column_names,
-            desc="Tokenizing training data"
+            desc="Tokenizing training data",
         )
 
         if val_dataset:
             val_dataset = val_dataset.map(
                 tokenize_function,
                 remove_columns=val_dataset.column_names,
-                desc="Tokenizing validation data"
+                desc="Tokenizing validation data",
             )
 
         return train_dataset, val_dataset
@@ -298,7 +301,9 @@ class LoRATrainer:
             logging_steps=self.config.logging_steps,
             save_steps=self.config.save_steps,
             eval_steps=self.config.eval_steps if val_dataset else None,
-            eval_strategy="steps" if val_dataset else "no",  # Changed from evaluation_strategy
+            eval_strategy=(
+                "steps" if val_dataset else "no"
+            ),  # Changed from evaluation_strategy
             save_strategy="steps",
             load_best_model_at_end=val_dataset is not None,
             optim=self.config.optim,
@@ -356,20 +361,12 @@ def main():
 
     # Data
     parser.add_argument(
-        "--train_data",
-        type=str,
-        default="datasets/Output/lora_splits/train.json"
+        "--train_data", type=str, default="datasets/Output/lora_splits/train.json"
     )
     parser.add_argument(
-        "--val_data",
-        type=str,
-        default="datasets/Output/lora_splits/val.json"
+        "--val_data", type=str, default="datasets/Output/lora_splits/val.json"
     )
-    parser.add_argument(
-        "--output_dir",
-        type=str,
-        default="models/lora_checkpoints"
-    )
+    parser.add_argument("--output_dir", type=str, default="models/lora_checkpoints")
 
     args = parser.parse_args()
 

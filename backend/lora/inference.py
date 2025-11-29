@@ -5,17 +5,19 @@ Inference script combining LoRA fine-tuned model with RAG retrieval.
 
 # Fix SQLite version for ChromaDB (must be before any chromadb imports)
 try:
-    __import__('pysqlite3')
+    __import__("pysqlite3")
     import sys
-    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
 except ImportError:
     pass  # pysqlite3 not installed, will use system sqlite3
 
-import torch
 import argparse
 import sys
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Dict, Optional
+
+import torch
 
 # Add parent directory to path for RAG imports
 sys.path.append(str(Path(__file__).parent.parent))
@@ -33,7 +35,7 @@ class DecoPlanInference:
         base_model_name: str,
         lora_adapter_path: str,
         furniture_db_path: str = "./furniture_db",
-        device: str = "auto"
+        device: str = "auto",
     ):
         """
         Initialize DecoPlan inference system.
@@ -58,8 +60,7 @@ class DecoPlanInference:
         # Load model and tokenizer
         print("\nLoading model and tokenizer...")
         self.tokenizer = AutoTokenizer.from_pretrained(
-            base_model_name,
-            trust_remote_code=True
+            base_model_name, trust_remote_code=True
         )
 
         if self.tokenizer.pad_token is None:
@@ -71,15 +72,13 @@ class DecoPlanInference:
             base_model_name,
             device_map=device,
             torch_dtype=torch.float16,
-            trust_remote_code=True
+            trust_remote_code=True,
         )
 
         # Load LoRA adapter
         print("  Loading LoRA adapter...")
         self.model = PeftModel.from_pretrained(
-            self.base_model,
-            lora_adapter_path,
-            torch_dtype=torch.float16
+            self.base_model, lora_adapter_path, torch_dtype=torch.float16
         )
 
         self.model.eval()
@@ -91,7 +90,7 @@ class DecoPlanInference:
         room_type: str,
         style: str,
         floor_plan_metadata: Optional[Dict] = None,
-        n_furniture: int = 15
+        n_furniture: int = 15,
     ) -> str:
         """
         Create prompt with RAG-retrieved furniture context.
@@ -111,7 +110,7 @@ class DecoPlanInference:
             user_prompt=user_prompt,
             room_type=room_type,
             style=style,
-            n_results=n_furniture
+            n_results=n_furniture,
         )
 
         # Build prompt
@@ -126,8 +125,8 @@ class DecoPlanInference:
         # Add floor plan info if available
         if floor_plan_metadata:
             prompt_parts.append("\nRoom Dimensions:")
-            if 'room_dimensions' in floor_plan_metadata:
-                dims = floor_plan_metadata['room_dimensions']
+            if "room_dimensions" in floor_plan_metadata:
+                dims = floor_plan_metadata["room_dimensions"]
                 prompt_parts.append(
                     f"  Length: {dims.get('length', 'N/A')}m, "
                     f"Width: {dims.get('width', 'N/A')}m"
@@ -150,7 +149,7 @@ class DecoPlanInference:
         max_new_tokens: int = 512,
         temperature: float = 0.7,
         top_p: float = 0.9,
-        do_sample: bool = True
+        do_sample: bool = True,
     ) -> str:
         """
         Generate response using LoRA-finetuned model.
@@ -167,10 +166,7 @@ class DecoPlanInference:
         """
         # Tokenize input
         inputs = self.tokenizer(
-            prompt,
-            return_tensors="pt",
-            truncation=True,
-            max_length=2048
+            prompt, return_tensors="pt", truncation=True, max_length=2048
         ).to(self.model.device)
 
         # Generate
@@ -182,17 +178,16 @@ class DecoPlanInference:
                 top_p=top_p,
                 do_sample=do_sample,
                 pad_token_id=self.tokenizer.pad_token_id,
-                eos_token_id=self.tokenizer.eos_token_id
+                eos_token_id=self.tokenizer.eos_token_id,
             )
 
         # Decode
-        generated_text = self.tokenizer.decode(
-            outputs[0],
-            skip_special_tokens=True
-        )
+        generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
 
         # Extract only the generated part (remove prompt)
-        prompt_length = len(self.tokenizer.decode(inputs.input_ids[0], skip_special_tokens=True))
+        prompt_length = len(
+            self.tokenizer.decode(inputs.input_ids[0], skip_special_tokens=True)
+        )
         response = generated_text[prompt_length:].strip()
 
         return response
@@ -205,7 +200,7 @@ class DecoPlanInference:
         floor_plan_metadata: Optional[Dict] = None,
         n_furniture: int = 15,
         max_new_tokens: int = 512,
-        temperature: float = 0.7
+        temperature: float = 0.7,
     ) -> Dict:
         """
         End-to-end prediction with RAG + LoRA.
@@ -228,20 +223,18 @@ class DecoPlanInference:
             room_type=room_type,
             style=style,
             floor_plan_metadata=floor_plan_metadata,
-            n_furniture=n_furniture
+            n_furniture=n_furniture,
         )
 
         # Generate response
         response = self.generate(
-            prompt=rag_prompt,
-            max_new_tokens=max_new_tokens,
-            temperature=temperature
+            prompt=rag_prompt, max_new_tokens=max_new_tokens, temperature=temperature
         )
 
         # Get retrieved furniture for reference
         retrieved_furniture = self.retriever.retrieve(
             query=f"{style} {room_type.replace('_', ' ')}: {user_prompt}",
-            n_results=n_furniture
+            n_results=n_furniture,
         )
 
         return {
@@ -249,25 +242,25 @@ class DecoPlanInference:
                 "prompt": user_prompt,
                 "room_type": room_type,
                 "style": style,
-                "floor_plan_metadata": floor_plan_metadata
+                "floor_plan_metadata": floor_plan_metadata,
             },
             "retrieved_furniture": [
                 {
-                    "name": item['name'],
-                    "type": item['furniture_type'],
-                    "material": item['material'],
-                    "color": item['color'],
-                    "feel": item['feel']
+                    "name": item["name"],
+                    "type": item["furniture_type"],
+                    "material": item["material"],
+                    "color": item["color"],
+                    "feel": item["feel"],
                 }
                 for item in retrieved_furniture
             ],
-            "model_response": response
+            "model_response": response,
         }
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Run inference with LoRA + RAG for interior design"
+        description="Run inference with LoRA + RAG for interior design",
     )
 
     # Model
@@ -275,19 +268,19 @@ def main():
         "--base_model",
         type=str,
         default="llava-hf/llava-1.5-7b-hf",
-        help="Base model name or path"
+        help="Base model name or path",
     )
     parser.add_argument(
         "--lora_adapter",
         type=str,
         default="models/lora_checkpoints/final_model",
-        help="Path to LoRA adapter"
+        help="Path to LoRA adapter",
     )
     parser.add_argument(
         "--furniture_db",
         type=str,
         default="./furniture_db",
-        help="Path to furniture vector database"
+        help="Path to furniture vector database",
     )
 
     # Input
@@ -295,19 +288,19 @@ def main():
         "--prompt",
         type=str,
         default="I want a clean, minimalist living room with neutral colors",
-        help="User's design request"
+        help="User's design request",
     )
     parser.add_argument(
         "--room_type",
         type=str,
         default="living_room",
-        help="Room type"
+        help="Room type",
     )
     parser.add_argument(
         "--style",
         type=str,
         default="minimalist",
-        help="Design style"
+        help="Design style",
     )
 
     # Generation
@@ -315,19 +308,19 @@ def main():
         "--n_furniture",
         type=int,
         default=15,
-        help="Number of furniture items to retrieve"
+        help="Number of furniture items to retrieve",
     )
     parser.add_argument(
         "--max_tokens",
         type=int,
         default=512,
-        help="Maximum tokens to generate"
+        help="Maximum tokens to generate",
     )
     parser.add_argument(
         "--temperature",
         type=float,
         default=0.7,
-        help="Sampling temperature"
+        help="Sampling temperature",
     )
 
     args = parser.parse_args()
@@ -336,7 +329,7 @@ def main():
     inference = DecoPlanInference(
         base_model_name=args.base_model,
         lora_adapter_path=args.lora_adapter,
-        furniture_db_path=args.furniture_db
+        furniture_db_path=args.furniture_db,
     )
 
     # Run prediction
@@ -353,13 +346,13 @@ def main():
         style=args.style,
         n_furniture=args.n_furniture,
         max_new_tokens=args.max_tokens,
-        temperature=args.temperature
+        temperature=args.temperature,
     )
 
     print("=" * 80)
     print("Model Response:")
     print("=" * 80)
-    print(result['model_response'])
+    print(result["model_response"])
     print("\n" + "=" * 80)
 
 

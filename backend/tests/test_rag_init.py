@@ -19,14 +19,16 @@ DB_PATH_STR = str(DB_PATH)
 DB_EXISTS = DB_PATH.exists()
 skip_if_no_db = pytest.mark.skipif(
     not DB_EXISTS,
-    reason=f"Database not found at {DB_PATH}. Run build_furniture_db.py to create it."
+    reason=f"Database not found at {DB_PATH}. Run build_furniture_db.py to create it.",
 )
 
 
 def test_database_exists():
     """Test 1: Check database exists (or skip if not available)"""
     if not DB_PATH.exists():
-        pytest.skip(f"Database not found at {DB_PATH}. This is expected in CI environments.")
+        pytest.skip(
+            f"Database not found at {DB_PATH}. This is expected in CI environments."
+        )
 
     db_files = list(DB_PATH.glob("*"))
     assert len(db_files) > 0, "Database directory is empty"
@@ -37,12 +39,14 @@ def test_database_exists():
 def test_import_furniture_retriever():
     """Test 2: Import FurnitureRetriever"""
     from rag.furniture_retriever import FurnitureRetriever
+
     print("✓ FurnitureRetriever imported successfully")
 
 
 def test_import_rag_inference():
     """Test 3: Import RAGInference"""
     from rag.rag_inference import RAGInference
+
     print("✓ RAGInference imported successfully")
 
 
@@ -66,7 +70,7 @@ def test_retrieval():
 
     assert results is not None, "Retrieval returned None"
     assert len(results) > 0, "No results returned from retrieval"
-    assert 'name' in results[0], "Result missing 'name' field"
+    assert "name" in results[0], "Result missing 'name' field"
 
     print(f"✓ Retrieval successful! Found {len(results)} results")
     print(f"  Sample result: {results[0]['name']}")

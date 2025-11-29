@@ -6,20 +6,23 @@ Run this after installation to check if everything is working.
 
 # Fix SQLite version for ChromaDB (must be before any chromadb imports)
 try:
-    __import__('pysqlite3')
+    __import__("pysqlite3")
     import sys
-    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
 except ImportError:
     pass  # pysqlite3 not installed, will use system sqlite3
 
 import sys
 from pathlib import Path
 
+
 def print_header(text):
     """Print formatted header."""
     print("\n" + "=" * 80)
     print(f" {text}")
     print("=" * 80 + "\n")
+
 
 def check_imports():
     """Check if all required packages are installed."""
@@ -52,6 +55,7 @@ def check_imports():
     print("\n✓ All dependencies installed!")
     return True
 
+
 def check_datasets():
     """Check if dataset files exist."""
     print_header("Checking Dataset Files")
@@ -81,6 +85,7 @@ def check_datasets():
     print("\n✓ All dataset files present!")
     return True
 
+
 def check_rag_components():
     """Check if RAG scripts are present."""
     print_header("Checking RAG Components")
@@ -107,6 +112,7 @@ def check_rag_components():
 
     print("\n✓ All RAG components present!")
     return True
+
 
 def check_lora_components():
     """Check if LoRA scripts are present."""
@@ -136,17 +142,21 @@ def check_lora_components():
     print("\n✓ All LoRA components present!")
     return True
 
+
 def check_cuda():
     """Check CUDA availability."""
     print_header("Checking CUDA Support")
 
     try:
         import torch
+
         if torch.cuda.is_available():
             print(f"✓ CUDA available")
             print(f"  - CUDA Version: {torch.version.cuda}")
             print(f"  - GPU: {torch.cuda.get_device_name(0)}")
-            print(f"  - VRAM: {torch.cuda.get_device_properties(0).total_memory / 1e9:.1f} GB")
+            print(
+                f"  - VRAM: {torch.cuda.get_device_properties(0).total_memory / 1e9:.1f} GB"
+            )
             return True
         else:
             print("⚠ CUDA not available")
@@ -156,6 +166,7 @@ def check_cuda():
     except ImportError:
         print("✗ PyTorch not installed")
         return False
+
 
 def check_optional_setup():
     """Check optional components that may be generated later."""
@@ -177,6 +188,7 @@ def check_optional_setup():
     print("\n✓ Optional components check complete")
     return True
 
+
 def print_next_steps():
     """Print next steps for user."""
     print_header("Next Steps")
@@ -184,11 +196,13 @@ def print_next_steps():
     print("To get started:")
     print("")
     print("1. Build RAG vector database:")
-    print('   python rag/build_furniture_db.py \\')
-    print('       --furniture_csv "datasets/Input/Furniture Dataset - Furniture Data.csv"')
+    print("   python rag/build_furniture_db.py \\")
+    print(
+        '       --furniture_csv "datasets/Input/Furniture Dataset - Furniture Data.csv"'
+    )
     print("")
     print("2. Test RAG retrieval:")
-    print('   python rag/furniture_retriever.py \\')
+    print("   python rag/furniture_retriever.py \\")
     print('       --query "minimalist living room"')
     print("")
     print("3. Prepare training data:")
@@ -201,6 +215,7 @@ def print_next_steps():
     print("   bash setup_rag_lora.sh")
     print("")
     print("See QUICKSTART_RAG_LORA.md for detailed instructions.")
+
 
 def main():
     """Run all checks."""
@@ -245,6 +260,7 @@ def main():
     else:
         print("\n⚠ Some checks failed. Please review the output above.")
         return 1
+
 
 if __name__ == "__main__":
     sys.exit(main())
