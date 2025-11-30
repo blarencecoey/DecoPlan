@@ -108,6 +108,113 @@ export const MOCK_FURNITURE_DATABASE: Omit<Furniture, 'visible'>[] = [
 ];
 
 /**
+ * Japanese-style furniture database
+ * Focused on minimalist, low-profile furniture with natural materials
+ */
+export const JAPANESE_FURNITURE_DATABASE: Omit<Furniture, 'visible'>[] = [
+  {
+    id: 'jp-table-001',
+    name: 'Chabudai Low Table',
+    category: 'table',
+    position: { x: 0, y: 0.15, z: 0 },
+    dimensions: { width: 1.2, height: 0.3, depth: 0.8 },
+    color: { r: 139, g: 90, b: 60 },
+    confidenceScore: 0.96,
+    description: 'Traditional Japanese low dining table',
+  },
+  {
+    id: 'jp-sofa-001',
+    name: 'Futon Seating',
+    category: 'sofa',
+    position: { x: -2.5, y: 0.2, z: -2 },
+    dimensions: { width: 1.8, height: 0.4, depth: 0.9 },
+    color: { r: 120, g: 110, b: 100 },
+    confidenceScore: 0.94,
+    description: 'Low-profile Japanese futon seating',
+  },
+  {
+    id: 'jp-cabinet-001',
+    name: 'Tansu Storage Cabinet',
+    category: 'cabinet',
+    position: { x: -4, y: 0.4, z: 2 },
+    dimensions: { width: 1.5, height: 0.8, depth: 0.4 },
+    color: { r: 90, g: 60, b: 40 },
+    confidenceScore: 0.92,
+    description: 'Traditional Japanese chest of drawers',
+  },
+  {
+    id: 'jp-lamp-001',
+    name: 'Andon Floor Lamp',
+    category: 'lamp',
+    position: { x: -3.5, y: 0.6, z: -3 },
+    dimensions: { width: 0.35, height: 1.2, depth: 0.35 },
+    color: { r: 240, g: 230, b: 210 },
+    confidenceScore: 0.90,
+    description: 'Traditional Japanese paper lantern lamp',
+  },
+  {
+    id: 'jp-shelf-001',
+    name: 'Shoji Screen Shelf',
+    category: 'shelf',
+    position: { x: 4, y: 0.9, z: 0 },
+    dimensions: { width: 1.2, height: 1.8, depth: 0.25 },
+    color: { r: 230, g: 220, b: 200 },
+    confidenceScore: 0.88,
+    description: 'Japanese-style display shelf with sliding doors',
+  },
+  {
+    id: 'jp-table-002',
+    name: 'Tea Ceremony Table',
+    category: 'table',
+    position: { x: 2, y: 0.12, z: -2.5 },
+    dimensions: { width: 0.8, height: 0.25, depth: 0.6 },
+    color: { r: 110, g: 75, b: 50 },
+    confidenceScore: 0.86,
+    description: 'Small low table for tea ceremonies',
+  },
+  {
+    id: 'jp-chair-001',
+    name: 'Zaisu Floor Chair',
+    category: 'chair',
+    position: { x: 0.8, y: 0.15, z: 0.5 },
+    dimensions: { width: 0.55, height: 0.3, depth: 0.55 },
+    color: { r: 100, g: 90, b: 80 },
+    confidenceScore: 0.85,
+    description: 'Japanese legless floor chair',
+  },
+  {
+    id: 'jp-chair-002',
+    name: 'Zaisu Floor Chair',
+    category: 'chair',
+    position: { x: -0.8, y: 0.15, z: 0.5 },
+    dimensions: { width: 0.55, height: 0.3, depth: 0.55 },
+    color: { r: 100, g: 90, b: 80 },
+    confidenceScore: 0.85,
+    description: 'Japanese legless floor chair',
+  },
+  {
+    id: 'jp-cabinet-002',
+    name: 'Kotatsu Table',
+    category: 'table',
+    position: { x: 2.5, y: 0.2, z: 1.5 },
+    dimensions: { width: 1.0, height: 0.4, depth: 1.0 },
+    color: { r: 130, g: 85, b: 55 },
+    confidenceScore: 0.83,
+    description: 'Heated table with blanket (winter essential)',
+  },
+  {
+    id: 'jp-other-001',
+    name: 'Bonsai Display Stand',
+    category: 'other',
+    position: { x: 3.5, y: 0.35, z: -1 },
+    dimensions: { width: 0.5, height: 0.7, depth: 0.4 },
+    color: { r: 140, g: 100, b: 70 },
+    confidenceScore: 0.80,
+    description: 'Decorative stand for bonsai or ikebana',
+  },
+];
+
+/**
  * Category color mapping for 3D visualization
  * Returns consistent colors for each furniture category
  */

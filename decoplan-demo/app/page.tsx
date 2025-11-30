@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Furniture } from '@/types/furniture';
-import { retrieveFurniture } from '@/lib/mockRAG';
+import { ChatMessage } from '@/types/chat';
+import { retrieveFurniture, detectRoomStyle } from '@/lib/mockRAG';
 import FurniturePanel from '@/components/FurniturePanel';
+import ChatBox from '@/components/ChatBox';
 
 // Dynamically import RoomViewer to avoid SSR issues with Three.js
 const RoomViewer = dynamic(() => import('@/components/RoomViewer'), {
@@ -26,6 +28,7 @@ const RoomViewer = dynamic(() => import('@/components/RoomViewer'), {
 export default function HomePage() {
   const [furniture, setFurniture] = useState<Furniture[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
 
   /**
    * Handles furniture retrieval from mock RAG system
@@ -37,6 +40,54 @@ export default function HomePage() {
       setFurniture(result.furniture);
     } catch (error) {
       console.error('Error retrieving furniture:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  /**
+   * Handles chat messages from the chatbox
+   */
+  const handleSendMessage = async (message: string) => {
+    // Add user message
+    const userMessage: ChatMessage = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: message,
+      timestamp: new Date(),
+    };
+    setChatMessages(prev => [...prev, userMessage]);
+
+    // Start loading
+    setIsLoading(true);
+
+    try {
+      // Detect style from message
+      const style = detectRoomStyle(message);
+
+      // Retrieve furniture based on query
+      const result = await retrieveFurniture(message, 10);
+      setFurniture(result.furniture);
+
+      // Add assistant response
+      const assistantMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: `I've generated a ${style} style living room with ${result.furniture.length} furniture items. The furniture has been placed in the 3D viewer for you to explore!`,
+        timestamp: new Date(),
+      };
+      setChatMessages(prev => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error('Error retrieving furniture:', error);
+
+      // Add error message
+      const errorMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: 'Sorry, I encountered an error while generating the room. Please try again.',
+        timestamp: new Date(),
+      };
+      setChatMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
@@ -102,14 +153,26 @@ export default function HomePage() {
         )}
       </div>
 
-      {/* Furniture Panel Section (30%) */}
-      <div className="w-[400px] border-l border-gray-300 flex-shrink-0 shadow-2xl">
-        <FurniturePanel
-          furniture={furniture}
-          onToggleFurniture={handleToggleFurniture}
-          onRetrieveFurniture={handleRetrieveFurniture}
-          isLoading={isLoading}
-        />
+      {/* Right Panel Section (30%) */}
+      <div className="w-[400px] border-l border-gray-300 flex-shrink-0 shadow-2xl flex flex-col">
+        {/* Chat Box - Upper half */}
+        <div className="h-1/2 border-b border-gray-300">
+          <ChatBox
+            messages={chatMessages}
+            onSendMessage={handleSendMessage}
+            isLoading={isLoading}
+          />
+        </div>
+
+        {/* Furniture Panel - Lower half */}
+        <div className="h-1/2 overflow-hidden">
+          <FurniturePanel
+            furniture={furniture}
+            onToggleFurniture={handleToggleFurniture}
+            onRetrieveFurniture={handleRetrieveFurniture}
+            isLoading={isLoading}
+          />
+        </div>
       </div>
     </main>
   );
