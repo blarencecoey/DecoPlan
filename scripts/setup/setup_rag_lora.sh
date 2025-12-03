@@ -23,7 +23,7 @@ echo "========================================"
 read -p "Install dependencies? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    pip install -r requirements.txt
+    pip install -r backend/requirements.txt
     echo "✓ Dependencies installed"
 else
     echo "Skipped dependency installation"
@@ -37,8 +37,8 @@ echo "========================================"
 read -p "Build furniture vector database? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    python rag/build_furniture_db.py \
-        --furniture_csv "datasets/Input/Furniture Dataset - Furniture Data.csv" \
+    python backend/rag/build_furniture_db.py \
+        --furniture_csv "data/datasets/Input/Furniture Dataset - Furniture Data.csv" \
         --db_path ./furniture_db \
         --model "all-MiniLM-L6-v2"
     echo "✓ Vector database built"
@@ -54,7 +54,7 @@ echo "========================================"
 read -p "Test RAG retrieval? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    python rag/furniture_retriever.py \
+    python backend/rag/furniture_retriever.py \
         --query "minimalist living room with neutral colors" \
         --n_results 10
     echo "✓ RAG retrieval tested"
@@ -70,9 +70,9 @@ echo "========================================"
 read -p "Prepare training data? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    python lora/prepare_training_data.py \
-        --input datasets/Output/training_examples_with_outputs.json \
-        --output datasets/Output/lora_training_data.json \
+    python backend/lora/prepare_training_data.py \
+        --input data/datasets/Output/training_examples_with_outputs.json \
+        --output data/datasets/Output/lora_training_data.json \
         --format conversation \
         --create_split \
         --val_ratio 0.1
@@ -92,11 +92,11 @@ read -p "Train LoRA adapter now? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "Starting LoRA training..."
-    echo "You can modify hyperparameters in lora/train_lora.py"
-    python lora/train_lora.py \
+    echo "You can modify hyperparameters in backend/lora/train_lora.py"
+    python backend/lora/train_lora.py \
         --model_name "llava-hf/llava-1.5-7b-hf" \
-        --train_data datasets/Output/lora_splits/train.json \
-        --val_data datasets/Output/lora_splits/val.json \
+        --train_data data/datasets/Output/lora_splits/train.json \
+        --val_data data/datasets/Output/lora_splits/val.json \
         --output_dir models/lora_checkpoints \
         --num_epochs 3 \
         --batch_size 4 \
@@ -104,7 +104,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "✓ LoRA training completed"
 else
     echo "Skipped LoRA training"
-    echo "You can train later with: python lora/train_lora.py"
+    echo "You can train later with: python backend/lora/train_lora.py"
 fi
 echo ""
 
@@ -115,10 +115,10 @@ echo "========================================"
 read -p "Generate RAG-enhanced prompts for all examples? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    python rag/rag_inference.py \
+    python backend/rag/rag_inference.py \
         --mode batch \
-        --prompts_csv datasets/Input/hdb_interior_design_prompts_300.csv \
-        --output datasets/Output/rag_enhanced_prompts.json \
+        --prompts_csv data/datasets/Input/hdb_interior_design_prompts_300.csv \
+        --output data/datasets/Output/rag_enhanced_prompts.json \
         --n_furniture 15
     echo "✓ RAG-enhanced prompts generated"
 else
@@ -134,16 +134,16 @@ echo ""
 echo "You can now:"
 echo ""
 echo "1. Test RAG retrieval:"
-echo "   python rag/furniture_retriever.py --query 'your query here'"
+echo "   python backend/rag/furniture_retriever.py --query 'your query here'"
 echo ""
 echo "2. Train LoRA (if not done already):"
-echo "   python lora/train_lora.py"
+echo "   python backend/lora/train_lora.py"
 echo ""
 echo "3. Run inference with RAG + LoRA:"
-echo "   python lora/inference.py --prompt 'your design request'"
+echo "   python backend/lora/inference.py --prompt 'your design request'"
 echo ""
 echo "4. Evaluate the model:"
-echo "   python lora/evaluate.py"
+echo "   python backend/lora/evaluate.py"
 echo ""
 echo "For more details, see RAG_LORA_README.md"
 echo ""

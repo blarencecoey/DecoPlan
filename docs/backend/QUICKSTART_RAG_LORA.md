@@ -2,6 +2,8 @@
 
 Get up and running with RAG and LoRA in 5 minutes!
 
+**Note:** All commands assume you're running from the project root directory unless otherwise specified.
+
 ## Prerequisites
 
 - Python 3.8+
@@ -13,7 +15,7 @@ Get up and running with RAG and LoRA in 5 minutes!
 Run the setup script:
 
 ```bash
-bash setup_rag_lora.sh
+bash scripts/setup/setup_rag_lora.sh
 ```
 
 This will guide you through:
@@ -28,20 +30,20 @@ This will guide you through:
 ### Step 1: Install Dependencies (2 min)
 
 ```bash
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
 ### Step 2: Build RAG Database (3 min)
 
 ```bash
-python rag/build_furniture_db.py \
-    --furniture_csv "datasets/Input/Furniture Dataset - Furniture Data.csv" \
+python backend/rag/build_furniture_db.py \
+    --furniture_csv "data/datasets/Input/Furniture Dataset - Furniture Data.csv" \
     --db_path ./furniture_db
 ```
 
 Expected output:
 ```
-Loading furniture data from: datasets/Input/...
+Loading furniture data from: data/datasets/Input/...
 Loaded 10000 furniture items
 Creating furniture descriptions...
 Generating embeddings...
@@ -51,7 +53,7 @@ Generating embeddings...
 ### Step 3: Test RAG Retrieval (30 sec)
 
 ```bash
-python rag/furniture_retriever.py \
+python backend/rag/furniture_retriever.py \
     --query "minimalist living room with neutral colors" \
     --n_results 10
 ```
@@ -61,18 +63,18 @@ You should see a list of relevant furniture items with relevance scores.
 ### Step 4: Prepare Training Data (1 min)
 
 ```bash
-python lora/prepare_training_data.py \
-    --input datasets/Output/training_examples_with_outputs.json \
-    --output datasets/Output/lora_training_data.json \
+python backend/lora/prepare_training_data.py \
+    --input data/datasets/Output/training_examples_with_outputs.json \
+    --output data/datasets/Output/lora_training_data.json \
     --format conversation \
     --create_split \
     --val_ratio 0.1
 ```
 
 This creates:
-- `datasets/Output/lora_training_data.json` (full dataset)
-- `datasets/Output/lora_splits/train.json` (90% training)
-- `datasets/Output/lora_splits/val.json` (10% validation)
+- `data/datasets/Output/lora_training_data.json` (full dataset)
+- `data/datasets/Output/lora_splits/train.json` (90% training)
+- `data/datasets/Output/lora_splits/val.json` (10% validation)
 
 ## Usage Examples
 
@@ -81,7 +83,7 @@ This creates:
 Generate enhanced prompts with furniture context:
 
 ```bash
-python rag/rag_inference.py \
+python backend/rag/rag_inference.py \
     --mode single \
     --prompt "I want a cozy Scandinavian bedroom" \
     --room_type bedroom \
@@ -92,10 +94,10 @@ python rag/rag_inference.py \
 ### LoRA Training (GPU Required, ~2-4 hours)
 
 ```bash
-python lora/train_lora.py \
+python backend/lora/train_lora.py \
     --model_name "llava-hf/llava-1.5-7b-hf" \
-    --train_data datasets/Output/lora_splits/train.json \
-    --val_data datasets/Output/lora_splits/val.json \
+    --train_data data/datasets/Output/lora_splits/train.json \
+    --val_data data/datasets/Output/lora_splits/val.json \
     --output_dir models/lora_checkpoints \
     --num_epochs 3 \
     --batch_size 4
@@ -112,7 +114,7 @@ python lora/train_lora.py \
 After training, run inference:
 
 ```bash
-python lora/inference.py \
+python backend/lora/inference.py \
     --base_model "llava-hf/llava-1.5-7b-hf" \
     --lora_adapter models/lora_checkpoints/final_model \
     --furniture_db ./furniture_db \
@@ -128,12 +130,12 @@ python lora/inference.py \
 
 ```bash
 # More furniture options
-python rag/furniture_retriever.py \
+python backend/rag/furniture_retriever.py \
     --query "industrial loft bedroom" \
     --n_results 20
 
 # Specific furniture type
-python rag/furniture_retriever.py \
+python backend/rag/furniture_retriever.py \
     --query "scandinavian style" \
     --n_results 10
 ```
@@ -141,10 +143,10 @@ python rag/furniture_retriever.py \
 ### 2. Generate RAG Contexts for All Prompts
 
 ```bash
-python rag/rag_inference.py \
+python backend/rag/rag_inference.py \
     --mode batch \
-    --prompts_csv datasets/Input/hdb_interior_design_prompts_300.csv \
-    --output datasets/Output/rag_enhanced_prompts.json
+    --prompts_csv data/datasets/Input/hdb_interior_design_prompts_300.csv \
+    --output data/datasets/Output/rag_enhanced_prompts.json
 ```
 
 This creates enhanced prompts for all 300 examples that can be used with any LLM.
@@ -155,16 +157,16 @@ If you want to test the LoRA pipeline without full training:
 
 ```bash
 # Use only first 10 examples for quick test
-python lora/prepare_training_data.py \
-    --input datasets/Output/training_examples_with_outputs.json \
-    --output datasets/Output/lora_test_data.json \
+python backend/lora/prepare_training_data.py \
+    --input data/datasets/Output/training_examples_with_outputs.json \
+    --output data/datasets/Output/lora_test_data.json \
     --format conversation \
     --max_examples 10 \
     --create_split
 
 # Train for 1 epoch
-python lora/train_lora.py \
-    --train_data datasets/Output/lora_splits/train.json \
+python backend/lora/train_lora.py \
+    --train_data data/datasets/Output/lora_splits/train.json \
     --num_epochs 1 \
     --batch_size 2
 ```
@@ -172,10 +174,10 @@ python lora/train_lora.py \
 ### 4. Evaluate Model Performance
 
 ```bash
-python lora/evaluate.py \
+python backend/lora/evaluate.py \
     --base_model "llava-hf/llava-1.5-7b-hf" \
     --lora_adapter models/lora_checkpoints/final_model \
-    --test_data datasets/Output/lora_splits/val.json \
+    --test_data data/datasets/Output/lora_splits/val.json \
     --output evaluation/results.json \
     --max_samples 10
 ```
@@ -206,9 +208,9 @@ python lora/evaluate.py \
 
 After setup:
 ```
-furniture_db/           ~500 MB   (Vector database)
-models/lora_checkpoints/ ~8 GB    (LoRA adapters)
-datasets/Output/        ~50 MB    (Training data)
+furniture_db/                  ~500 MB   (Vector database)
+models/lora_checkpoints/        ~8 GB    (LoRA adapters)
+data/datasets/Output/          ~50 MB    (Training data)
 ```
 
 ## Troubleshooting
@@ -216,17 +218,17 @@ datasets/Output/        ~50 MB    (Training data)
 ### "CUDA out of memory"
 ```bash
 # Reduce batch size
-python lora/train_lora.py --batch_size 2
+python backend/lora/train_lora.py --batch_size 2
 
 # Or reduce sequence length
-python lora/train_lora.py --max_seq_length 1024
+python backend/lora/train_lora.py --max_seq_length 1024
 ```
 
 ### "ChromaDB not found"
 ```bash
 # Rebuild database
-python rag/build_furniture_db.py \
-    --furniture_csv "datasets/Input/Furniture Dataset - Furniture Data.csv"
+python backend/rag/build_furniture_db.py \
+    --furniture_csv "data/datasets/Input/Furniture Dataset - Furniture Data.csv"
 ```
 
 ### "Model not found"
@@ -245,7 +247,7 @@ Make sure you have a stable internet connection.
 
 - See full documentation: `RAG_LORA_README.md`
 - Check code comments in each script
-- Review example outputs in `datasets/Output/`
+- Review example outputs in `data/datasets/Output/`
 
 ## Performance Benchmarks
 
