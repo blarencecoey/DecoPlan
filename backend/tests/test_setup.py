@@ -60,21 +60,23 @@ def check_datasets():
     """Check if dataset files exist."""
     print_header("Checking Dataset Files")
 
+    # Datasets are in the project root's data directory
+    data_dir = Path(__file__).resolve().parent.parent.parent / "data"
     files = {
-        "datasets/Input/hdb_interior_design_prompts_300.csv": "Prompts CSV",
-        "datasets/Input/Furniture Dataset - Furniture Data.csv": "Furniture CSV",
-        "datasets/Output/training_examples_with_outputs.json": "Training Examples",
+        data_dir / "datasets/Input/hdb_interior_design_prompts_300.csv": "Prompts CSV",
+        data_dir / "datasets/Input/Furniture Dataset - Furniture Data.csv": "Furniture CSV",
+        data_dir / "datasets/Output/training_examples_with_outputs.json": "Training Examples",
     }
 
     missing = []
     for filepath, name in files.items():
-        path = Path(filepath)
+        path = filepath if isinstance(filepath, Path) else Path(filepath)
         if path.exists():
             size_mb = path.stat().st_size / (1024 * 1024)
             print(f"✓ {name:30} found ({size_mb:.1f} MB)")
         else:
             print(f"✗ {name:30} NOT FOUND")
-            missing.append(filepath)
+            missing.append(str(filepath))
 
     if missing:
         print(f"\n❌ Missing files: {len(missing)}")
@@ -172,14 +174,16 @@ def check_optional_setup():
     """Check optional components that may be generated later."""
     print_header("Checking Optional Components")
 
+    # Optional components are in the project root's data directory
+    data_dir = Path(__file__).resolve().parent.parent.parent / "data"
     components = {
-        "furniture_db/": "RAG Vector Database",
-        "models/lora_checkpoints/": "LoRA Checkpoints",
-        "datasets/Output/lora_splits/": "Train/Val Splits",
+        data_dir / "furniture_db": "RAG Vector Database",
+        data_dir / "models" / "lora_checkpoints": "LoRA Checkpoints",
+        data_dir / "datasets" / "Output" / "lora_splits": "Train/Val Splits",
     }
 
-    for path_str, name in components.items():
-        path = Path(path_str)
+    for path_obj, name in components.items():
+        path = path_obj if isinstance(path_obj, Path) else Path(path_obj)
         if path.exists():
             print(f"✓ {name:30} exists")
         else:

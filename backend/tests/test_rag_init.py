@@ -9,10 +9,10 @@ from pathlib import Path
 import pytest
 
 # Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-# Determine correct database path
-DB_PATH = Path(__file__).parent.parent.parent / "data" / "furniture_db"
+# Determine correct database path (use resolve() to get absolute path)
+DB_PATH = Path(__file__).resolve().parent.parent.parent / "data" / "furniture_db"
 DB_PATH_STR = str(DB_PATH)
 
 # Check if database exists (skip tests if not)
