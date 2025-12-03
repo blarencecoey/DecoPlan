@@ -40,8 +40,8 @@ CORS(app)  # Enable CORS for frontend integration
 # Global variables for RAG components
 retriever = None
 rag_inference = None
-# Update path to point to data/furniture_db
-DB_PATH = str(Path(__file__).parent.parent.parent / "data" / "furniture_db")
+# Update path to point to data/furniture_db (use resolve() to get absolute path)
+DB_PATH = str(Path(__file__).resolve().parent.parent.parent / "data" / "furniture_db")
 
 
 def initialize_rag_components():
