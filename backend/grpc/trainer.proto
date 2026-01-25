@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package trainer;
+option csharp_namespace = "Trainer";
+
+service TrainerService {
+  rpc Retrain (RetrainRequest) returns (RetrainResponse);
+}
+
+message RetrainRequest {
+  string json_payload = 1;
+}
+
+message RetrainResponse {
+  bool success = 1;
+  string message = 2;
+}
